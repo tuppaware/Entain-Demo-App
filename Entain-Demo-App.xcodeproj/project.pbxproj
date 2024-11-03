@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		634B6C002CD83D6A00E1E317 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 634B6BE72CD83D6900E1E317 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 634B6BEE2CD83D6900E1E317;
+			remoteInfo = "Entain-Demo-App";
+		};
+		634B6C0A2CD83D6A00E1E317 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 634B6BE72CD83D6900E1E317 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 634B6BEE2CD83D6900E1E317;
+			remoteInfo = "Entain-Demo-App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Entain-Demo-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Entain-Demo-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Entain-Demo-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		634B6BF12CD83D6900E1E317 /* Entain-Demo-App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Entain-Demo-App";
+			sourceTree = "<group>";
+		};
+		634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Entain-Demo-AppTests";
+			sourceTree = "<group>";
+		};
+		634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Entain-Demo-AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		634B6BEC2CD83D6900E1E317 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6BFC2CD83D6A00E1E317 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6C062CD83D6A00E1E317 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		634B6BE62CD83D6900E1E317 = {
+			isa = PBXGroup;
+			children = (
+				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
+				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
+				634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
+				634B6BF02CD83D6900E1E317 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		634B6BF02CD83D6900E1E317 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */,
+				634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */,
+				634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-App" */;
+			buildPhases = (
+				634B6BEB2CD83D6900E1E317 /* Sources */,
+				634B6BEC2CD83D6900E1E317 /* Frameworks */,
+				634B6BED2CD83D6900E1E317 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
+			);
+			name = "Entain-Demo-App";
+			packageProductDependencies = (
+			);
+			productName = "Entain-Demo-App";
+			productReference = 634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		634B6BFE2CD83D6A00E1E317 /* Entain-Demo-AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppTests" */;
+			buildPhases = (
+				634B6BFB2CD83D6A00E1E317 /* Sources */,
+				634B6BFC2CD83D6A00E1E317 /* Frameworks */,
+				634B6BFD2CD83D6A00E1E317 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				634B6C012CD83D6A00E1E317 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
+			);
+			name = "Entain-Demo-AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Entain-Demo-AppTests";
+			productReference = 634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		634B6C082CD83D6A00E1E317 /* Entain-Demo-AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppUITests" */;
+			buildPhases = (
+				634B6C052CD83D6A00E1E317 /* Sources */,
+				634B6C062CD83D6A00E1E317 /* Frameworks */,
+				634B6C072CD83D6A00E1E317 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				634B6C0B2CD83D6A00E1E317 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
+			);
+			name = "Entain-Demo-AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Entain-Demo-AppUITests";
+			productReference = 634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		634B6BE72CD83D6900E1E317 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					634B6BEE2CD83D6900E1E317 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					634B6BFE2CD83D6A00E1E317 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 634B6BEE2CD83D6900E1E317;
+					};
+					634B6C082CD83D6A00E1E317 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 634B6BEE2CD83D6900E1E317;
+					};
+				};
+			};
+			buildConfigurationList = 634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "Entain-Demo-App" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 634B6BE62CD83D6900E1E317;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 634B6BF02CD83D6900E1E317 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */,
+				634B6BFE2CD83D6A00E1E317 /* Entain-Demo-AppTests */,
+				634B6C082CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		634B6BED2CD83D6900E1E317 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6BFD2CD83D6A00E1E317 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6C072CD83D6A00E1E317 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		634B6BEB2CD83D6900E1E317 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6BFB2CD83D6A00E1E317 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		634B6C052CD83D6A00E1E317 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		634B6C012CD83D6A00E1E317 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */;
+			targetProxy = 634B6C002CD83D6A00E1E317 /* PBXContainerItemProxy */;
+		};
+		634B6C0B2CD83D6A00E1E317 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */;
+			targetProxy = 634B6C0A2CD83D6A00E1E317 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		634B6C112CD83D6A00E1E317 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		634B6C122CD83D6A00E1E317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		634B6C142CD83D6A00E1E317 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Entain-Demo-App/Preview Content\"";
+				DEVELOPMENT_TEAM = B54Q48H848;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		634B6C152CD83D6A00E1E317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Entain-Demo-App/Preview Content\"";
+				DEVELOPMENT_TEAM = B54Q48H848;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		634B6C172CD83D6A00E1E317 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B54Q48H848;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain-Demo-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Entain-Demo-App";
+			};
+			name = Debug;
+		};
+		634B6C182CD83D6A00E1E317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B54Q48H848;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain-Demo-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Entain-Demo-App";
+			};
+			name = Release;
+		};
+		634B6C1A2CD83D6A00E1E317 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B54Q48H848;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Entain-Demo-App";
+			};
+			name = Debug;
+		};
+		634B6C1B2CD83D6A00E1E317 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B54Q48H848;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Entain-Demo-App";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "Entain-Demo-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				634B6C112CD83D6A00E1E317 /* Debug */,
+				634B6C122CD83D6A00E1E317 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				634B6C142CD83D6A00E1E317 /* Debug */,
+				634B6C152CD83D6A00E1E317 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				634B6C172CD83D6A00E1E317 /* Debug */,
+				634B6C182CD83D6A00E1E317 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				634B6C1A2CD83D6A00E1E317 /* Debug */,
+				634B6C1B2CD83D6A00E1E317 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 634B6BE72CD83D6900E1E317 /* Project object */;
+}
