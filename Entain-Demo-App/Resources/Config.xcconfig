@@ -1,0 +1,9 @@
+//
+//  Config.xcconfig
+//  EntainDemoApp
+//
+//  Created by Adam Ware on 4/11/2024.
+//
+
+// API Endpoint
+BASE_URL = api.neds.com.au

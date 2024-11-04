@@ -24,9 +24,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Entain-Demo-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Entain-Demo-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Entain-Demo-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		633A1DF12CD8954900DC872C /* EntainDemoApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EntainDemoApp-Info.plist"; sourceTree = "<group>"; };
+		634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntainDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		634B6BFF2CD83D6A00E1E317 /* EntainDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		634B6BE62CD83D6900E1E317 = {
 			isa = PBXGroup;
 			children = (
+				633A1DF12CD8954900DC872C /* EntainDemoApp-Info.plist */,
 				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
 				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
 				634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
@@ -85,9 +87,9 @@
 		634B6BF02CD83D6900E1E317 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */,
-				634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */,
-				634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */,
+				634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */,
+				634B6BFF2CD83D6A00E1E317 /* EntainDemoAppTests.xctest */,
+				634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +97,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */ = {
+		634B6BEE2CD83D6900E1E317 /* EntainDemoApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-App" */;
+			buildConfigurationList = 634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoApp" */;
 			buildPhases = (
 				634B6BEB2CD83D6900E1E317 /* Sources */,
 				634B6BEC2CD83D6900E1E317 /* Frameworks */,
@@ -106,20 +108,21 @@
 			buildRules = (
 			);
 			dependencies = (
+				634B6C1E2CD83F9D00E1E317 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
 			);
-			name = "Entain-Demo-App";
+			name = EntainDemoApp;
 			packageProductDependencies = (
 			);
 			productName = "Entain-Demo-App";
-			productReference = 634B6BEF2CD83D6900E1E317 /* Entain-Demo-App.app */;
+			productReference = 634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		634B6BFE2CD83D6A00E1E317 /* Entain-Demo-AppTests */ = {
+		634B6BFE2CD83D6A00E1E317 /* EntainDemoAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppTests" */;
+			buildConfigurationList = 634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoAppTests" */;
 			buildPhases = (
 				634B6BFB2CD83D6A00E1E317 /* Sources */,
 				634B6BFC2CD83D6A00E1E317 /* Frameworks */,
@@ -133,16 +136,16 @@
 			fileSystemSynchronizedGroups = (
 				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
 			);
-			name = "Entain-Demo-AppTests";
+			name = EntainDemoAppTests;
 			packageProductDependencies = (
 			);
 			productName = "Entain-Demo-AppTests";
-			productReference = 634B6BFF2CD83D6A00E1E317 /* Entain-Demo-AppTests.xctest */;
+			productReference = 634B6BFF2CD83D6A00E1E317 /* EntainDemoAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		634B6C082CD83D6A00E1E317 /* Entain-Demo-AppUITests */ = {
+		634B6C082CD83D6A00E1E317 /* EntainDemoAppUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppUITests" */;
+			buildConfigurationList = 634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoAppUITests" */;
 			buildPhases = (
 				634B6C052CD83D6A00E1E317 /* Sources */,
 				634B6C062CD83D6A00E1E317 /* Frameworks */,
@@ -156,11 +159,11 @@
 			fileSystemSynchronizedGroups = (
 				634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
 			);
-			name = "Entain-Demo-AppUITests";
+			name = EntainDemoAppUITests;
 			packageProductDependencies = (
 			);
 			productName = "Entain-Demo-AppUITests";
-			productReference = 634B6C092CD83D6A00E1E317 /* Entain-Demo-AppUITests.xctest */;
+			productReference = 634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +189,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "Entain-Demo-App" */;
+			buildConfigurationList = 634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "EntainDemoApp" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -195,14 +198,17 @@
 			);
 			mainGroup = 634B6BE62CD83D6900E1E317;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				634B6C1C2CD83E3300E1E317 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 634B6BF02CD83D6900E1E317 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */,
-				634B6BFE2CD83D6A00E1E317 /* Entain-Demo-AppTests */,
-				634B6C082CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
+				634B6BEE2CD83D6900E1E317 /* EntainDemoApp */,
+				634B6BFE2CD83D6A00E1E317 /* EntainDemoAppTests */,
+				634B6C082CD83D6A00E1E317 /* EntainDemoAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,19 +264,25 @@
 /* Begin PBXTargetDependency section */
 		634B6C012CD83D6A00E1E317 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */;
+			target = 634B6BEE2CD83D6900E1E317 /* EntainDemoApp */;
 			targetProxy = 634B6C002CD83D6A00E1E317 /* PBXContainerItemProxy */;
 		};
 		634B6C0B2CD83D6A00E1E317 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 634B6BEE2CD83D6900E1E317 /* Entain-Demo-App */;
+			target = 634B6BEE2CD83D6900E1E317 /* EntainDemoApp */;
 			targetProxy = 634B6C0A2CD83D6A00E1E317 /* PBXContainerItemProxy */;
+		};
+		634B6C1E2CD83F9D00E1E317 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 634B6C1D2CD83F9D00E1E317 /* SwiftLintBuildToolPlugin */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		634B6C112CD83D6A00E1E317 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 634B6BF12CD83D6900E1E317 /* Entain-Demo-App */;
+			baseConfigurationReferenceRelativePath = Resources/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -334,6 +346,8 @@
 		};
 		634B6C122CD83D6A00E1E317 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 634B6BF12CD83D6900E1E317 /* Entain-Demo-App */;
+			baseConfigurationReferenceRelativePath = Resources/Config.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -399,6 +413,7 @@
 				DEVELOPMENT_TEAM = B54Q48H848;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EntainDemoApp-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +443,7 @@
 				DEVELOPMENT_TEAM = B54Q48H848;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EntainDemoApp-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -461,7 +477,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain-Demo-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Entain-Demo-App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntainDemoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EntainDemoApp";
 			};
 			name = Debug;
 		};
@@ -480,7 +496,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Entain-Demo-App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Entain-Demo-App";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EntainDemoApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EntainDemoApp";
 			};
 			name = Release;
 		};
@@ -521,7 +537,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "Entain-Demo-App" */ = {
+		634B6BEA2CD83D6900E1E317 /* Build configuration list for PBXProject "EntainDemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				634B6C112CD83D6A00E1E317 /* Debug */,
@@ -530,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-App" */ = {
+		634B6C132CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				634B6C142CD83D6A00E1E317 /* Debug */,
@@ -539,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppTests" */ = {
+		634B6C162CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				634B6C172CD83D6A00E1E317 /* Debug */,
@@ -548,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "Entain-Demo-AppUITests" */ = {
+		634B6C192CD83D6A00E1E317 /* Build configuration list for PBXNativeTarget "EntainDemoAppUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				634B6C1A2CD83D6A00E1E317 /* Debug */,
@@ -558,6 +574,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		634B6C1C2CD83E3300E1E317 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		634B6C1D2CD83F9D00E1E317 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 634B6C1C2CD83E3300E1E317 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 634B6BE72CD83D6900E1E317 /* Project object */;
 }

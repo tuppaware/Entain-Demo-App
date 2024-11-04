@@ -1,0 +1,94 @@
+disabled_rules:
+  - nesting
+  - trailing_comma
+  - trailing_whitespace
+  - large_tuple
+
+opt_in_rules:
+  - array_init
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - contains_over_first_not_nil
+  - convenience_type
+  - empty_count
+  - empty_string
+  - expiring_todo
+  - fallthrough
+  - fatal_error_message
+  - first_where
+  - flatmap_over_map_reduce
+  - identical_operands
+  - implicit_return
+  - indentation_width
+  - last_where
+  - legacy_random
+  - modifier_order
+  - multiline_arguments
+  - multiline_function_chains
+  - multiline_parameters
+  - operator_usage_whitespace
+  - overridden_super_call
+  - pattern_matching_keywords
+  - prohibited_interface_builder
+  - prohibited_super_call
+  - quick_discouraged_call
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - untyped_error_in_catch
+  - unowned_variable_capture
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  - yoda_condition
+
+excluded:
+  - Frameworks
+
+analyzer_rules:
+  - explicit_self
+  - unused_declaration
+  - unused_import
+
+closure_end_indentation:
+  severity: error
+
+identifier_name:
+  min_length: 2
+
+indentation_width:
+  severity: warning
+  indentation_width: 4
+
+unowned_variable_capture:
+  severity: error
+
+line_length:
+  warning: 150
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+  ignores_function_declarations: true
+
+type_body_length:
+  warning: 300
+  error: 400
+  
+type_name:
+  min_length: 3
+  max_length:
+    warning: 40
+    error: 50
+  excluded:
+    - iPhone
+    - API
+    - App
+  
+multiline_arguments:
+  first_argument_location: any_line
+  only_enforce_after_first_closure_on_first_line: true
