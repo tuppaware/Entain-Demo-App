@@ -3,6 +3,7 @@ disabled_rules:
   - trailing_comma
   - trailing_whitespace
   - large_tuple
+  - empty_enum_arguments
 
 opt_in_rules:
   - array_init
@@ -19,7 +20,6 @@ opt_in_rules:
   - first_where
   - flatmap_over_map_reduce
   - identical_operands
-  - implicit_return
   - indentation_width
   - last_where
   - legacy_random

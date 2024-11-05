@@ -9,7 +9,7 @@ import Combine
 
 /// Protocol for the NetworkManager
 protocol NetworkServiceProtocol {
-    func performRequest<T: Decodable>(endpoint: EndpointRequest, type: T.Type) -> AnyPublisher<T, Error>
+    func performRequest<T: Decodable>(endpoint: APIEndpoint, type: T.Type) -> AnyPublisher<T, Error>
 }
 
 /// A class responsible for handling network requests.
@@ -28,7 +28,7 @@ public class NetworkManager: NetworkServiceProtocol {
     ///   - type: The expected Decodable type of the response.
     /// - Returns: A publisher that emits the decoded object or an error.
     public func performRequest<T: Decodable>(
-        endpoint: EndpointRequest,
+        endpoint: APIEndpoint,
         type: T.Type
     ) -> AnyPublisher<T, Error> {
         let request = endpoint.urlRequest

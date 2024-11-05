@@ -11,7 +11,9 @@ import SwiftUI
 struct EntainDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let interactor = NextoGoInteractor(networkService: NetworkManager())
+            let viewModel = NextToGoViewModel(interactor: interactor)
+            NextToGoView(viewModel: viewModel)
         }
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 
 /// Configuration values sourced from the Config.xconfig file.
 /// Normally sensitive keys/values would be populated from an .env file or done at the pipeline.
+/// This would not be checked into the repo
 enum Configuration: String {
     case baseURL = "BASE_URL"
     

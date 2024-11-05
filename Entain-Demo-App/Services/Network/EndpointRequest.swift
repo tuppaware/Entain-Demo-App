@@ -19,12 +19,24 @@ public protocol EndpointRequest {
     var headers: [String: String]? { get }
     /// Optional HTTP body data for the request
     var body: Data? { get }
+    /// Optional query parameters to include in the URL
+    var queryParameters: [String: String]? { get }
 }
 
 extension EndpointRequest {
     /// Computed property that constructs a URLRequest from the endpoint information
     public var urlRequest: URLRequest {
-        var request = URLRequest(url: baseURL.appendingPathComponent(path))
+        var urlComponents = URLComponents(url: baseURL.appendingPathComponent(path), resolvingAgainstBaseURL: false)
+        
+        if let queryParameters = queryParameters {
+            urlComponents?.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        }
+        
+        guard let url = urlComponents?.url else {
+            fatalError("Invalid URL components")
+        }
+        
+        var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         request.httpBody = body

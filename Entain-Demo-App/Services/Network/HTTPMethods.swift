@@ -9,7 +9,7 @@
 public enum HTTPMethods: String {
     case get = "GET"
     case post = "POST"
-    // We are unlikely to need these, but here for completionst reasons 
+    // We are unlikely to need these, but here for completionist reasons
     case put = "PUT"
     case delete = "DELETE"
     case patch = "PATCH"
