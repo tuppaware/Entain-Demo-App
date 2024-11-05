@@ -6,37 +6,63 @@
 //
 
 import Foundation
-import Observation
 import Combine
 
-protocol NextToGoViewModelProtocol {
-    var nextToGoDisplayModel: NextToGoDisplayModel { get set }
+protocol NextToGoViewModelProtocol: ObservableObject {
+    var nextToGoDisplayModel: NextToGoDisplayModel { get }
+    var isLoading: Bool { get }
+    func refresh()
+    func updateFilter(to newFilter: NextToGoDisplayModel.FilterOption)
 }
 
-@Observable
 class NextToGoViewModel: NextToGoViewModelProtocol {
-    @ObservationIgnored private var cancellables = Set<AnyCancellable>()
+    // MARK: - Published Properties
+    @Published var nextToGoDisplayModel: NextToGoDisplayModel
+    @Published private(set) var isLoading: Bool = false
+
+    // MARK: - Private Properties
     private let interactor: NextToGoInteractorProtocol
-    var isLoading: Bool = false
-    var nextToGoDisplayModel: NextToGoDisplayModel
-    
+    private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - Initialization
     init(interactor: NextToGoInteractorProtocol) {
         self.interactor = interactor
-        self.nextToGoDisplayModel = .init(filter: .all)
+        self.nextToGoDisplayModel = NextToGoDisplayModel(filter: .all)
+        setupBindings()
+        refresh() // Initial data load
     }
-    
-    // Computed property to observe interactor's nextToGoRaces
-    var currentRaces: RaceData? {
-        interactor.nextToGoRaces
+
+    // MARK: - Private Methods
+    private func setupBindings() {
+        interactor.nextToGoRacesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] raceData in
+                guard let self = self else { return }
+                self.isLoading = false
+                self.nextToGoDisplayModel.currentRaces = raceData
+            }
+            .store(in: &cancellables)
+
+        // Optional: Handle errors if interactor publishes them
+        // TODO: - add error publisher 
+//        if let errorPublisher = interactor.errorPublisher {
+//            errorPublisher
+//                .receive(on: DispatchQueue.main)
+//                .sink { [weak self] error in
+//                    self?.isLoading = false
+//                    // Handle the error (e.g., set an error message)
+//                }
+//                .store(in: &cancellables)
+//        }
     }
-    
-    // Function to update the display model when interactor's data changes
-    func updateDisplayModel() {
-        nextToGoDisplayModel.currentRaces = interactor.nextToGoRaces
-    }
-    
+
+    // MARK: - Public Methods
     func refresh() {
-        cancellables.removeAll()
+        isLoading = true
         interactor.refreshData()
+    }
+
+    func updateFilter(to newFilter: NextToGoDisplayModel.FilterOption) {
+        nextToGoDisplayModel.filter = newFilter
     }
 }

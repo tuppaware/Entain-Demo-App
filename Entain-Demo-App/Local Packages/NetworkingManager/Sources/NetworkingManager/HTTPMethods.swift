@@ -4,6 +4,7 @@
 //
 //  Created by Adam Ware on 4/11/2024.
 //
+import Foundation
 
 /// Define HTTP methods 
 public enum HTTPMethods: String {

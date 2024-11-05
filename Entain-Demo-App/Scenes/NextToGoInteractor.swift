@@ -7,25 +7,31 @@
 
 import Foundation
 import Combine
+import NetworkingManager
 
 /// Protocol defining the requirements for the Next To Go interactor
 protocol NextToGoInteractorProtocol: AnyObject {
     /// Race data from the API
     var nextToGoRaces: RaceData? { get }
     
+    var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> { get }
+    
     func refreshData()
 }
 
-@Observable
 final class NextoGoInteractor: NextToGoInteractorProtocol {
     // Network Service
-    @ObservationIgnored private let networkService: NetworkServiceProtocol
+    private let networkService: NetworkServiceProtocol
     // AnyCancellable to manage memory for Combine subscriptions
-    @ObservationIgnored private var cancellables: Set<AnyCancellable> = []
+    private var cancellables: Set<AnyCancellable> = []
     // Timer to refresh data every 60 seconds
-    @ObservationIgnored private var refreshTimer: Timer?
+    private var refreshTimer: Timer?
     // Published Race data
-    var nextToGoRaces: RaceData?
+    @Published var nextToGoRaces: RaceData?
+    
+    var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> {
+        $nextToGoRaces.eraseToAnyPublisher()
+    }
     
     /// Initializes a new instance of `NextoGoInteractor`
     /// - Parameter networkService: A `NetworkServiceProtocol` to handle network operations
@@ -49,7 +55,7 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     private func fetchNextToGoFromServer() async throws {
         // Sends a network request to fetch "Next To Go" data, expecting a `RaceData` response
         networkService.performRequest(
-            endpoint: .nextToGo(5),
+            endpoint: .nextToGo(10),
             type: RaceData.self
         )
             .sink(
@@ -65,9 +71,9 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
                     }
                 },
                 receiveValue: { [weak self] data in
-                    // Processes and prints the received data
-                    print("Received data: \(data)")
-                    self?.nextToGoRaces = data
+                    guard let self else { return }
+                    print("Received data")
+                    self.nextToGoRaces = data
                 }
             )
             .store(in: &cancellables)

@@ -9,13 +9,16 @@ import Foundation
 
 /// Enum representing various API endpoints with associated request details
 public enum APIEndpoint: EndpointRequest {
+    
+    // Noting that you'd normally want to store this in an .xconfig file or similar
+    private static let basURLString: String = "https://api.neds.com.au"
+    
     // return our next to go races - passing the number of races we want returned from the endpoint.
     case nextToGo(Int)
 
     // Base URL for the API
     public var baseURL: URL {
-        let baseURL = Configuration.value(for: .baseURL)
-        guard let url = URL(string: "https://\(baseURL ?? "")") else {
+        guard let url = URL(string: APIEndpoint.basURLString) else {
             // TODO: Handle this error more graccefully with logging
             return URL(string: "https://entain.com")!
         }
@@ -26,7 +29,7 @@ public enum APIEndpoint: EndpointRequest {
     // passes the count of races we want returned
     public var path: String {
         switch self {
-        case .nextToGo(let count):
+        case .nextToGo(_):
             return "rest/v1/racing/"
         }
     }

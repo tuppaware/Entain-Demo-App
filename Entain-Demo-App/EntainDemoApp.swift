@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import NetworkingManager
 
 @main
 struct EntainDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            let interactor = NextoGoInteractor(networkService: NetworkManager())
+            let interactor = NextoGoInteractor(networkService: NetworkingManager())
             let viewModel = NextToGoViewModel(interactor: interactor)
             NextToGoView(viewModel: viewModel)
         }

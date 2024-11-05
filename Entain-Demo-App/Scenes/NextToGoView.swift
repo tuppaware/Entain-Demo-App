@@ -5,44 +5,43 @@
 //  Created by Adam Ware on 5/11/2024.
 //
 import SwiftUI
+import SharedUI
 
 struct NextToGoView: View {
-    @Bindable var viewModel: NextToGoViewModel
-    
-    init(viewModel: NextToGoViewModel) {
-        self.viewModel = viewModel
-    }
-    
+    @ObservedObject var viewModel: NextToGoViewModel
+
     var body: some View {
         VStack {
-            Picker("Filter", selection: $viewModel.nextToGoDisplayModel.filter) {
-                ForEach(NextToGoDisplayModel.FilterOption.allCases, id: \.self) { option in
-                    Text(option.rawValue.capitalized).tag(option)
+            if viewModel.isLoading {
+                ProgressView("Loading...")
+            } else {
+                ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in 
+                    print("tapped")
+                }
+
+                if let raceData = viewModel.nextToGoDisplayModel.currentRaces {
+                    List {
+                        ForEach(filteredRaces(raceData) ?? [], id: \.meetingId) { value in
+                            Text(value.raceName ?? "")
+                        }
+                    }
+                } else {
+                    Text("No races available.")
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
-        }
-        .onAppear() {
-            viewModel.refresh()
         }
     }
-    
-//    // Function to filter races based on the selected filter option
-//    func filteredRaces(_ raceData: RaceData) -> [Race] {
-//        switch viewModel.nextToGoDisplayModel.filter {
-//        case .all:
-//            return raceData.races
-//        case .greyhoundRacing:
-//            return raceData.races.filter { $0.type == .greyhound }
-//        case .horseRacing:
-//            return raceData.races.filter { $0.type == .horse }
-//        case .harnessRacing:
-//            return raceData.races.filter { $0.type == .harness }
-//        }
-//    }
+
+    private func filteredRaces(_ raceData: RaceData) -> [RaceSummary]? {
+        switch viewModel.nextToGoDisplayModel.filter {
+        case .all:
+            return raceData.data?.raceSummaries?.compactMap({ $0.value })
+        case .greyhoundRacing:
+            return raceData.data?.raceSummaries?.compactMap({ $0.value })
+        case .horseRacing:
+            return raceData.data?.raceSummaries?.compactMap({ $0.value })
+        case .harnessRacing:
+            return raceData.data?.raceSummaries?.compactMap({ $0.value })
+        }
+    }
 }
-
-
-//#Preview {
-//    NextToGoView()
-//}

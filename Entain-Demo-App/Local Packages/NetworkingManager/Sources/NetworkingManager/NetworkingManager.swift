@@ -8,12 +8,12 @@ import Foundation
 import Combine
 
 /// Protocol for the NetworkManager
-protocol NetworkServiceProtocol {
+public protocol NetworkServiceProtocol {
     func performRequest<T: Decodable>(endpoint: APIEndpoint, type: T.Type) -> AnyPublisher<T, Error>
 }
 
 /// A class responsible for handling network requests.
-public class NetworkManager: NetworkServiceProtocol {
+public class NetworkingManager: NetworkServiceProtocol {
     private let session: URLSession
     
     /// Initializes a new instance of NetworkManager.

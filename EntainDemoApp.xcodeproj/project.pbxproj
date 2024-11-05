@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6315382A2CD9E52B006DFC86 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 631538292CD9E52B006DFC86 /* SharedUI */; };
+		633A1E0D2CD9D78900DC872C /* NetworkingManager in Frameworks */ = {isa = PBXBuildFile; productRef = 633A1E0C2CD9D78900DC872C /* NetworkingManager */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		634B6C002CD83D6A00E1E317 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,9 +35,23 @@
 		634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		633A1E0B2CD9D6F500DC872C /* Exceptions for "Entain-Demo-App" folder in "EntainDemoApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Local Packages/NetworkingManager",
+				"Local Packages/SharedUI",
+			);
+			target = 634B6BEE2CD83D6900E1E317 /* EntainDemoApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		634B6BF12CD83D6900E1E317 /* Entain-Demo-App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				633A1E0B2CD9D6F500DC872C /* Exceptions for "Entain-Demo-App" folder in "EntainDemoApp" target */,
+			);
 			path = "Entain-Demo-App";
 			sourceTree = "<group>";
 		};
@@ -53,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633A1E0D2CD9D78900DC872C /* NetworkingManager in Frameworks */,
+				6315382A2CD9E52B006DFC86 /* SharedUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +94,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		633A1E072CD9D6AB00DC872C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		634B6BE62CD83D6900E1E317 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +108,7 @@
 				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
 				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
 				634B6C0C2CD83D6A00E1E317 /* Entain-Demo-AppUITests */,
+				633A1E072CD9D6AB00DC872C /* Frameworks */,
 				634B6BF02CD83D6900E1E317 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +144,8 @@
 			);
 			name = EntainDemoApp;
 			packageProductDependencies = (
+				633A1E0C2CD9D78900DC872C /* NetworkingManager */,
+				631538292CD9E52B006DFC86 /* SharedUI */,
 			);
 			productName = "Entain-Demo-App";
 			productReference = 634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */;
@@ -589,6 +620,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		631538292CD9E52B006DFC86 /* SharedUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedUI;
+		};
+		633A1E0C2CD9D78900DC872C /* NetworkingManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NetworkingManager;
+		};
 		634B6C1D2CD83F9D00E1E317 /* SwiftLintBuildToolPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 634B6C1C2CD83E3300E1E317 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */;
