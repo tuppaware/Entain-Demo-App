@@ -12,25 +12,23 @@ public protocol RaceItemViewModelProtocol {
     var raceNumber: Int { get }
     var meetingName: String { get }
     var image: Image { get }
+    var countryName: String { get }
     var timerID: UUID { get }
     func setLoading(_ isLoading: Bool)
-    func updateRemainingTime(from interval: TimeInterval)
 }
-
 
 public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObject {
     // MARK: - Properties
     @Published private(set) public var raceNumber: Int
     @Published private(set) public var meetingName: String
-    @Published private(set) var isLoading: Bool = false
-    @Published private(set) var countDownTime: Int?
     @Published private(set) public var image: Image
-    @Published private(set) var venueName: String
-    
-    public let uuid: UUID = .init()
-    private(set) var remainingTime: String = ""
+    @Published private(set) public var countryName: String
+    @Published private var isLoading: Bool = false
+    @Published private var countDownTime: Int?
     private(set) public var timerID: UUID
-    
+    public let uuid: UUID = .init()
+
+    // Computed count down string
     var countdownString: String {
         guard let countDownTime else { return "" }
             
@@ -40,19 +38,22 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
         
         var components: [String] = []
         
-        if hours > 0 {
+        switch true {
+        case countDownTime < 1:
+            return ""
+        case hours > 0:
             components.append("\(hours)h")
-        }
-        // Show only minutes if time is over 5 minutes
-        if countDownTime > 300 { // 300 seconds = 5 minutes
+        case countDownTime > 300:
             components.append("\(minutes)m")
-        } else {
-            // Show both minutes and seconds if under 5 minutes
-            if minutes > 0 {
-                components.append("\(minutes)m")
-            }
+        case countDownTime < 300 && minutes > 0:
+            components.append("\(minutes)m")
             components.append("\(seconds)s")
+        case countDownTime < 300 && minutes < 1:
+            components.append("\(seconds)s")
+        default :
+            return ""
         }
+
         
         return components.joined(separator: " ")
     }
@@ -61,13 +62,13 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
         raceNumber: Int,
         meetingName: String,
         image: Image,
-        venueName: String,
+        countryName: String,
         timerID: UUID
     ) {
         self.raceNumber = raceNumber
         self.meetingName = meetingName
         self.image = image
-        self.venueName = venueName
+        self.countryName = countryName
         self.timerID = timerID
     }
 
@@ -78,13 +79,4 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
     public func setCountdown(_ countdown: Int) {
         self.countDownTime = countdown
     }
-    
-    public func updateRemainingTime(from interval: TimeInterval) {
-        // Convert interval to a readable format, e.g., "HH:mm:ss"
-        let hours = Int(interval) / 3600
-        let minutes = (Int(interval) % 3600) / 60
-        let seconds = Int(interval) % 60
-        self.remainingTime = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
-    
 }

@@ -29,6 +29,7 @@ internal enum Asset {
   internal static let harnessRacing = ImageAsset(name: "harnessRacing")
   internal static let horseRacing = ImageAsset(name: "horseRacing")
   internal static let nextToGo = ImageAsset(name: "NextToGo")
+  internal static let secondaryColor = ColorAsset(name: "SecondaryColor")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

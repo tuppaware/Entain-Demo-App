@@ -33,9 +33,9 @@ public struct RaceItemView: View {
                     .monospacedDigit()
                     .font(.subheadline)
                     .foregroundColor(.primary)
-                Text(viewModel.venueName)
+                Text(viewModel.countryName)
                     .font(.footnote)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.primary)
             }
         }
         .accessibilityLabel("Countdown to race start \(viewModel.meetingName) R\(viewModel.raceNumber) \(viewModel.countdownString)")
@@ -48,7 +48,7 @@ public struct RaceItemView: View {
         raceNumber: 25,
         meetingName: "Meeting name",
         image: Image(uiImage: .checkmark),
-        venueName: "venue",
+        countryName: "countryName",
         timerID: UUID()
     )
     RaceItemView(viewModel: vm)

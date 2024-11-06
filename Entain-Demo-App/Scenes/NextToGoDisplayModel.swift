@@ -53,6 +53,19 @@ final class NextToGoDisplayModel: ObservableObject {
             case .harnessRacing: return "Harness Racing"
             }
         }
+        
+        var displayIcon: Image {
+            switch self {
+            case .all:
+                return Image(.nextToGo)
+            case .greyhoundRacing:
+                return Image(.greyhoundRacing)
+            case .horseRacing:
+                return Image(.horseRacing)
+            case .harnessRacing:
+                return Image(.harnessRacing)
+            }
+        }
     }
     // Filter option, default to all
     @Published var filter: FilterOption = .all
@@ -74,7 +87,7 @@ final class NextToGoDisplayModel: ObservableObject {
             ButtonFilterDisplayModel.ButtonModel(
                 title: option.displayTitle,
                 isSelected: option == filter,
-                image: nil
+                image: option.displayIcon
             )
         }
         return ButtonFilterDisplayModel(buttons: buttons)
@@ -110,7 +123,7 @@ final class NextToGoDisplayModel: ObservableObject {
                 raceNumber: race.raceNumber,
                 meetingName: race.meetingName,
                 image: RaceCategory(rawValue: race.categoryId)?.displayIcon ?? Image(uiImage: .nextToGo),
-                venueName: race.venueName,
+                countryName: race.venueCountry,
                 timerID: timerID
             )
             

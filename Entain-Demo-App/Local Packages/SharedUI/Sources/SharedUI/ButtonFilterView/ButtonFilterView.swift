@@ -20,25 +20,33 @@ public struct ButtonFilterView: View {
     }
 
     public var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .center) {
             ForEach(displayModel.buttons, id: \.id) { button in
                 Button(action: {
                     buttonAction(button.title)
+                    
                 }) {
-                    Text(button.title)
-                        .font(.system(size: 14))
-                        .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-                        .foregroundColor(.primary)
-                        .background(Color.clear)
+                    HStack{
+                        Image(systemName: button.isSelected ? "checkmark.square.fill" : "square")
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                        button.image
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: 25, maxHeight: 25)
+                    }
                 }
                 .accessibilityAddTraits(.isButton)
                 .accessibilityLabel(button.title)
                 .accessibilityHint("Enables filtering by \(button.title).")
-                .buttonStyle(PurpleButtonStyle())
-                .frame(minHeight: 42, maxHeight: 42)
+                .frame(maxWidth: .infinity, minHeight: 42)
+                .padding(.horizontal, 4)
             }
+            
         }
-        .padding(.vertical, 8)
+        .padding(4)
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -46,9 +54,7 @@ struct PurpleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .foregroundColor(.primary)
-            .background(configuration.isPressed ? Color.purple : Color.gray)
-            .cornerRadius(16)
-
+            .cornerRadius(4)
     }
 }
 

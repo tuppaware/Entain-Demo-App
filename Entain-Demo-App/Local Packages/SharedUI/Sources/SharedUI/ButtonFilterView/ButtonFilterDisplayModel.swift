@@ -15,12 +15,12 @@ public struct ButtonFilterDisplayModel {
         public let id: UUID = UUID()
         public let title: String
         public let isSelected: Bool
-        public let image: Image?
+        public let image: Image
         
         public init(
             title: String,
             isSelected: Bool,
-            image: Image? = nil
+            image: Image
         ) {
             self.title = title
             self.isSelected = isSelected

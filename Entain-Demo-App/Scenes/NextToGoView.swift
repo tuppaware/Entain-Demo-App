@@ -12,28 +12,30 @@ struct NextToGoView: View {
     @ObservedObject var viewModel: NextToGoViewModel
 
     var body: some View {
-        VStack() {
-            Label(
-                title: {
-                    Text(EntainStrings.NextToGo.title)
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                },
-                icon: {
-                    Image(.nextToGo)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundStyle(.white)
-                        .frame(width: 30, height: 30)
+        VStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Label(
+                    title: {
+                        Text(EntainStrings.NextToGo.title)
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                    },
+                    icon: {
+                        Image(.nextToGo)
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundStyle(.white)
+                            .frame(width: 30, height: 30)
+                    }
+                )
+                .padding(.leading, 8)
+                ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in
+                    print("tapped \(title)")
                 }
-            )
-            .padding(8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(.black)
-            
-            ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in
-                print("tapped \(title)")
-            }
 
             let raceData = viewModel.nextToGoDisplayModel.filteredRacesListDisplayModel
             if raceData.isEmpty {

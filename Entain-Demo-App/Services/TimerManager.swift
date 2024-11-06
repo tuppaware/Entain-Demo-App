@@ -20,7 +20,7 @@ class CentralTimerManager: ObservableObject {
     @Published private(set) var timers: [UUID: TimerItem] = [:]
     
     private var timerCancellables: [UUID: AnyCancellable] = [:]
-    private let timerInterval: TimeInterval = 1.0 // Set the update frequency, e.g., every second
+    private let timerInterval: TimeInterval = 1.0 // Set the update frequency, 0.5 seconds otherwise the value often falls between 0...1
     private let timerQueue = DispatchQueue(label: "centralTimerQueue")
     
     /// Singleton instance for centralized access.

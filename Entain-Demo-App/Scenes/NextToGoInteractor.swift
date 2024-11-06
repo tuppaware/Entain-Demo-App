@@ -28,7 +28,7 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     private var refreshTimerID: UUID?
     // Refresh timer
     // TODO: - formalise this value
-    private let refreshInterval: TimeInterval = 60
+    private let refreshInterval: TimeInterval = 30
     // A TimerManager for handling count down timing on races
     private let timerManager: CentralTimerManager
     // Published Race data
@@ -44,6 +44,7 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     ) {
         self.networkService = networkService
         self.timerManager = timerManager
+        self.startDataRefreshTimer()
     }
     
     public func refreshData() {
@@ -69,7 +70,6 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
                 // Handles the completion of the request
                 switch completion {
                 case .finished:
-                    // Handle successful completion if needed.
                     break
                 case .failure(let error):
                     // Handle errors by passing them to the `handleError` function
@@ -88,30 +88,31 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     // MARK: - Private methods
     
     private func startDataRefreshTimer() {
-        // Start a repeating timer using CentralTimerManager
-        refreshTimerID = timerManager.addTimer(duration: refreshInterval)
+        // Initialize a repeating timer using CentralTimerManager
+        let timerID = timerManager.addTimer(duration: refreshInterval)
+        refreshTimerID = timerID
         
-        // Subscribe to timer updates
+        // Subscribe to timer updates, triggering only when the timer reaches the final second
         timerManager.$timers
-            .compactMap { [weak self] timers in
-                self?.refreshTimerID.flatMap { timers[$0] }
+            .filter { timers in
+                guard let timer = timers[timerID] else { return false }
+                return timer.remainingTime <= 1
             }
-            .filter { $0.remainingTime <= 1 }
             .sink { [weak self] _ in
+                guard let self = self else { return }
+                
+                // Trigger the API call asynchronously
                 Task {
                     do {
-                        try await self?.fetchNextToGoFromServer()
+                        print("here")
+                        try await self.fetchNextToGoFromServer()
                     } catch {
-                        self?.handleError(error)
+                        self.handleError(error)
                     }
                 }
-                // Reset the timer
-                if let refreshTimerID = self?.refreshTimerID {
-                    self?.timerManager.resetTimer(
-                        for: refreshTimerID,
-                        duration: self?.refreshInterval ?? 60
-                    )
-                }
+                
+                // Reset the timer to maintain continuous data refreshes
+                self.timerManager.resetTimer(for: timerID, duration: self.refreshInterval)
             }
             .store(in: &cancellables)
     }

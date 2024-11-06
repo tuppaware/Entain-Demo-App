@@ -35,7 +35,7 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
         self.timerManager = timerManager
         self.nextToGoDisplayModel = NextToGoDisplayModel(timerManager: timerManager)
         setupBindings()
-        subscribeToTimers()
+        // subscribeToTimers()
         refresh() // Initial data load
     }
 
