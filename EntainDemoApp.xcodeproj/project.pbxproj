@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6315382A2CD9E52B006DFC86 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 631538292CD9E52B006DFC86 /* SharedUI */; };
 		633A1E0D2CD9D78900DC872C /* NetworkingManager in Frameworks */ = {isa = PBXBuildFile; productRef = 633A1E0C2CD9D78900DC872C /* NetworkingManager */; };
+		63E006512CD9F9A3008CFCCC /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 63E006502CD9F9A3008CFCCC /* swiftgen.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntainDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634B6BFF2CD83D6A00E1E317 /* EntainDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E006502CD9F9A3008CFCCC /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -104,6 +106,7 @@
 		634B6BE62CD83D6900E1E317 = {
 			isa = PBXGroup;
 			children = (
+				63E006502CD9F9A3008CFCCC /* swiftgen.yml */,
 				633A1DF12CD8954900DC872C /* EntainDemoApp-Info.plist */,
 				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
 				634B6C022CD83D6A00E1E317 /* Entain-Demo-AppTests */,
@@ -249,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E006512CD9F9A3008CFCCC /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

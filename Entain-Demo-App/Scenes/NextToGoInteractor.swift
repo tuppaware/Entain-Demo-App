@@ -25,7 +25,12 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     // AnyCancellable to manage memory for Combine subscriptions
     private var cancellables: Set<AnyCancellable> = []
     // Timer to refresh data every 60 seconds
-    private var refreshTimer: Timer?
+    private var refreshTimerID: UUID?
+    // Refresh timer
+    // TODO: - formalise this value
+    private let refreshInterval: TimeInterval = 60
+    // A TimerManager for handling count down timing on races
+    private let timerManager: CentralTimerManager
     // Published Race data
     @Published var nextToGoRaces: RaceData?
     
@@ -33,11 +38,12 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
         $nextToGoRaces.eraseToAnyPublisher()
     }
     
-    /// Initializes a new instance of `NextoGoInteractor`
-    /// - Parameter networkService: A `NetworkServiceProtocol` to handle network operations
-    init(networkService: NetworkServiceProtocol) {
+    init(
+        networkService: NetworkServiceProtocol,
+        timerManager: CentralTimerManager = CentralTimerManager.shared
+    ) {
         self.networkService = networkService
-        startDataRefreshTimer()
+        self.timerManager = timerManager
     }
     
     public func refreshData() {
@@ -58,43 +64,56 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
             endpoint: .nextToGo(10),
             type: RaceData.self
         )
-            .sink(
-                receiveCompletion: { completion in
-                    // Handles the completion of the request
-                    switch completion {
-                    case .finished:
-                        // Handle successful completion if needed.
-                        break
-                    case .failure(let error):
-                        // Handle errors by passing them to the `handleError` function
-                        self.handleError(error)
-                    }
-                },
-                receiveValue: { [weak self] data in
-                    guard let self else { return }
-                    print("Received data")
-                    self.nextToGoRaces = data
+        .sink(
+            receiveCompletion: { completion in
+                // Handles the completion of the request
+                switch completion {
+                case .finished:
+                    // Handle successful completion if needed.
+                    break
+                case .failure(let error):
+                    // Handle errors by passing them to the `handleError` function
+                    self.handleError(error)
                 }
-            )
-            .store(in: &cancellables)
+            },
+            receiveValue: { [weak self] data in
+                guard let self else { return }
+                print("Received data")
+                self.nextToGoRaces = data
+            }
+        )
+        .store(in: &cancellables)
     }
     
     // MARK: - Private methods
     
-    /// Starts a timer to refresh server data every 60 seconds
     private func startDataRefreshTimer() {
-        refreshTimer = Timer.scheduledTimer(
-            withTimeInterval: 60,
-            repeats: true
-        ) { [weak self] _ in
-            Task {
-                do {
-                    try await self?.fetchNextToGoFromServer()
-                } catch {
-                    self?.handleError(error)
+        // Start a repeating timer using CentralTimerManager
+        refreshTimerID = timerManager.addTimer(duration: refreshInterval)
+        
+        // Subscribe to timer updates
+        timerManager.$timers
+            .compactMap { [weak self] timers in
+                self?.refreshTimerID.flatMap { timers[$0] }
+            }
+            .filter { $0.remainingTime <= 1 }
+            .sink { [weak self] _ in
+                Task {
+                    do {
+                        try await self?.fetchNextToGoFromServer()
+                    } catch {
+                        self?.handleError(error)
+                    }
+                }
+                // Reset the timer
+                if let refreshTimerID = self?.refreshTimerID {
+                    self?.timerManager.resetTimer(
+                        for: refreshTimerID,
+                        duration: self?.refreshInterval ?? 60
+                    )
                 }
             }
-        }
+            .store(in: &cancellables)
     }
     
     /// Handles network-related errors and provides specific error messages
@@ -123,6 +142,8 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     
     /// Deinitializes the timer
     deinit {
-        refreshTimer?.invalidate()
+        if let refreshTimerID = refreshTimerID {
+            timerManager.removeTimer(for: refreshTimerID)
+        }
     }
 }

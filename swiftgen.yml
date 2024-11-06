@@ -1,0 +1,13 @@
+strings:
+  inputs: Entain-Demo-App/Resources/en.lproj/Copy.strings
+  outputs:
+    - templateName: structured-swift5
+      output: Entain-Demo-App/Resources/Strings.swift
+      params:
+          enumName: EntainStrings
+xcassets:
+  inputs:
+      - Entain-Demo-App/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: Entain-Demo-App/Resources/Assets.swift

@@ -6,42 +6,57 @@
 //
 import SwiftUI
 import SharedUI
+import NetworkingManager
 
 struct NextToGoView: View {
     @ObservedObject var viewModel: NextToGoViewModel
 
     var body: some View {
-        VStack {
-            if viewModel.isLoading {
-                ProgressView("Loading...")
-            } else {
-                ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in 
-                    print("tapped")
+        VStack() {
+            Label(
+                title: {
+                    Text(EntainStrings.NextToGo.title)
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                },
+                icon: {
+                    Image(.nextToGo)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(.white)
+                        .frame(width: 30, height: 30)
                 }
+            )
+            .padding(8)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.black)
+            
+            ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in
+                print("tapped \(title)")
+            }
 
-                if let raceData = viewModel.nextToGoDisplayModel.currentRaces {
-                    List {
-                        ForEach(filteredRaces(raceData) ?? [], id: \.meetingId) { value in
-                            Text(value.raceName ?? "")
-                        }
+            let raceData = viewModel.nextToGoDisplayModel.filteredRacesListDisplayModel
+            if raceData.isEmpty {
+                Text("No races available.")
+                Spacer()
+            } else {
+                List {
+                    ForEach(raceData, id: \.uuid) { raceViewModel in
+                        RaceItemView(viewModel: raceViewModel)
                     }
-                } else {
-                    Text("No races available.")
                 }
+                .scrollContentBackground(.hidden)
+                .background(Color.clear)
             }
         }
+        .background(Color.accentColor)
     }
+}
 
-    private func filteredRaces(_ raceData: RaceData) -> [RaceSummary]? {
-        switch viewModel.nextToGoDisplayModel.filter {
-        case .all:
-            return raceData.data?.raceSummaries?.compactMap({ $0.value })
-        case .greyhoundRacing:
-            return raceData.data?.raceSummaries?.compactMap({ $0.value })
-        case .horseRacing:
-            return raceData.data?.raceSummaries?.compactMap({ $0.value })
-        case .harnessRacing:
-            return raceData.data?.raceSummaries?.compactMap({ $0.value })
-        }
-    }
+#Preview {
+    let interactor = NextoGoInteractor(
+        networkService: NetworkingManager()
+    )
+    let viewModel = NextToGoViewModel(interactor: interactor)
+    NextToGoView(viewModel: viewModel)
 }

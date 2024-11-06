@@ -8,6 +8,7 @@
 import Foundation
 
 /// Part of the larger RaceData structure
+/// Not likely to use this data.
 struct RaceForm: Codable {
     let distance: Int?
     let distanceType: DistanceType?

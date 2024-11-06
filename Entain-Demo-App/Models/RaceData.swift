@@ -29,8 +29,8 @@ struct RaceData: Codable {
     }
     
     struct DataClass: Codable {
-        let nextToGoIds: [String]?
-        let raceSummaries: [String: RaceSummary]?
+        let nextToGoIds: [String]
+        let raceSummaries: [String: RaceSummary]
 
         enum CodingKeys: String, CodingKey {
             case nextToGoIds = "next_to_go_ids"
@@ -39,8 +39,8 @@ struct RaceData: Codable {
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            nextToGoIds = try container.decodeIfPresent([String].self, forKey: .nextToGoIds)
-            raceSummaries = try container.decodeIfPresent([String: RaceSummary].self, forKey: .raceSummaries)
+            nextToGoIds = try container.decodeIfPresent([String].self, forKey: .nextToGoIds) ?? []
+            raceSummaries = try container.decodeIfPresent([String: RaceSummary].self, forKey: .raceSummaries) ?? [:]
         }
     }
 }

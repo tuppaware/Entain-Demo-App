@@ -7,32 +7,6 @@
 
 import SwiftUI
 
-public struct ButtonFilterDisplayModel {
-    
-    public let buttons: [ButtonFilterDisplayModel.ButtonModel]
-    
-    public struct ButtonModel: Identifiable {
-        public let id: UUID = UUID()
-        public let title: String
-        public let isSelected: Bool
-        public let image: Image?
-        
-        public init(
-            title: String,
-            isSelected: Bool,
-            image: Image? = nil
-        ) {
-            self.title = title
-            self.isSelected = isSelected
-            self.image = image
-        }
-    }
-    
-    public init(buttons: [ButtonFilterDisplayModel.ButtonModel]) {
-        self.buttons = buttons
-    }
-}
-
 public struct ButtonFilterView: View {
     public let displayModel: ButtonFilterDisplayModel
     public var buttonAction: (String) -> Void
@@ -57,11 +31,14 @@ public struct ButtonFilterView: View {
                         .foregroundColor(.primary)
                         .background(Color.clear)
                 }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityLabel(button.title)
+                .accessibilityHint("Enables filtering by \(button.title).")
                 .buttonStyle(PurpleButtonStyle())
                 .frame(minHeight: 42, maxHeight: 42)
             }
         }
-        .padding(.vertical, 16)
+        .padding(.vertical, 8)
     }
 }
 
