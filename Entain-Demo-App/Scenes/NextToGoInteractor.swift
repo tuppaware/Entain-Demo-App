@@ -44,7 +44,7 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     ) {
         self.networkService = networkService
         self.timerManager = timerManager
-        self.startDataRefreshTimer()
+        //self.startDataRefreshTimer()
     }
     
     public func refreshData() {

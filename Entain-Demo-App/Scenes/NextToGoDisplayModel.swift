@@ -33,15 +33,24 @@ enum RaceCategory: String, Codable, CaseIterable {
 
 /// The display model for the Next To Go view. required as a Class to handle the timers.
 final class NextToGoDisplayModel: ObservableObject {
-    enum FilterOption: String, CaseIterable {
-        case all, greyhoundRacing, horseRacing, harnessRacing
+    enum FilterOption: String, CaseIterable, TabRepresentable {
+        case all = "All"
+        case greyhoundRacing = "Greyhound Racing"
+        case horseRacing = "Horse Racing"
+        case harnessRacing = "Harness Racing"
         
-        var categoryID: String? {
+        var id: String { rawValue }
+        
+        var categoryID: String {
+            return raceCategory.rawValue
+        }
+
+        var raceCategory: RaceCategory {
             switch self {
-            case .all: return nil
-            case .greyhoundRacing: return RaceCategory.greyhoundRacing.rawValue
-            case .horseRacing: return RaceCategory.horseRacing.rawValue
-            case .harnessRacing: return RaceCategory.harnessRacing.rawValue
+            case .all: return .all
+            case .greyhoundRacing: return .greyhoundRacing
+            case .horseRacing: return .horseRacing
+            case .harnessRacing: return .harnessRacing
             }
         }
         
@@ -67,12 +76,13 @@ final class NextToGoDisplayModel: ObservableObject {
             }
         }
     }
-    // Filter option, default to all
-    @Published var filter: FilterOption = .all
+    
     // Store of all the current races
     @Published var currentRaces: RaceData?
     // Central Time manager for Timers
     private let timerManager: CentralTimerManager
+    // Filtered races list
+    @Published var filteredRacesListDisplayModel: [RaceItemViewModel] = []
     // Gotta store those cancellables somewhere
     private var cancellables: Set<AnyCancellable> = []
     // Track active timers by their UUID
@@ -82,19 +92,13 @@ final class NextToGoDisplayModel: ObservableObject {
         self.timerManager = timerManager
     }
     
-    var allFilterDisplayModel: ButtonFilterDisplayModel {
-        let buttons = FilterOption.allCases.map { option in
-            ButtonFilterDisplayModel.ButtonModel(
-                title: option.displayTitle,
-                isSelected: option == filter,
-                image: option.displayIcon
-            )
-        }
-        return ButtonFilterDisplayModel(buttons: buttons)
+    var allFilterDisplayModel: CustomSegmentedDisplayModel<FilterOption> {
+        return CustomSegmentedDisplayModel(tabs: FilterOption.allCases)
     }
     
-    var filteredRacesListDisplayModel: [RaceItemViewModel] {
-        guard let races = currentRaces?.data?.raceSummaries.values else { return [] }
+    // todo: clear timers - Also count up to 5 races always
+    func filterRaces(_ filterOption: FilterOption) {
+        guard let races = currentRaces?.data?.raceSummaries.values else { return }
         
         let filteredRaces = races.filter { race in
             // Filter out races that are in the past
@@ -102,12 +106,8 @@ final class NextToGoDisplayModel: ObservableObject {
                 return false
             }
             
-            // Filter by category
-            if let categoryID = filter.categoryID {
-                return race.categoryId == categoryID
-            }
-            
-            return true
+            // Filter by category, return true if all
+            return (filterOption == .all) ? true : (race.categoryId == filterOption.categoryID)
         }
         // Sort by Advertised Start time
         .sorted { $0.advertisedStart.seconds < $1.advertisedStart.seconds }
@@ -156,6 +156,6 @@ final class NextToGoDisplayModel: ObservableObject {
             return time1 < time2
         }
 
-        return sortedRaceItemViewModels
+        self.filteredRacesListDisplayModel = sortedRaceItemViewModels
     }
 }

@@ -5,5 +5,10 @@
   Created by Adam Ware on 5/11/2024.
   
 */
+"NextToGo.Title" = "Entain Demo App";
+"NextToGo.Section.Title" = "Next to go races";
 
-"NextToGo.Title" = "NEXT TO GO RACES";
+// Info and Error States
+"InfoState.NoRaces.Title" = "No races scheduled";
+"InfoState.NoRaces.Description" = "Whoops, looks like we dont have any races to show you at the moment.";
+"InfoState.NoRaces.PrimaryCTA.Title" = "Check again";

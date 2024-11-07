@@ -15,7 +15,6 @@ struct RaceSummary: Codable {
     let meetingName: String
     let categoryId: String
     let advertisedStart: AdvertisedStart
-    // let raceForm: RaceForm?
     let venueId: String
     let venueName: String
     let venueState: String
@@ -29,7 +28,6 @@ struct RaceSummary: Codable {
         case meetingName = "meeting_name"
         case categoryId = "category_id"
         case advertisedStart = "advertised_start"
-        // case raceForm = "race_form"
         case venueId = "venue_id"
         case venueName = "venue_name"
         case venueState = "venue_state"
@@ -45,7 +43,6 @@ struct RaceSummary: Codable {
         meetingName = try container.decodeIfPresent(String.self, forKey: .meetingName) ?? ""
         categoryId = try container.decodeIfPresent(String.self, forKey: .categoryId) ?? ""
         advertisedStart = try container.decodeIfPresent(AdvertisedStart.self, forKey: .advertisedStart) ?? .init(seconds: 0)
-        // raceForm = try container.decodeIfPresent(RaceForm.self, forKey: .raceForm)
         venueId = try container.decodeIfPresent(String.self, forKey: .venueId) ?? ""
         venueName = try container.decodeIfPresent(String.self, forKey: .venueName) ?? ""
         venueState = try container.decodeIfPresent(String.self, forKey: .venueState) ?? ""

@@ -8,47 +8,57 @@ import SwiftUI
 import SharedUI
 import NetworkingManager
 
+/// Next to Go View,
 struct NextToGoView: View {
+    // View Model
     @ObservedObject var viewModel: NextToGoViewModel
+    // Display Model
+    @ObservedObject var displayModel: NextToGoDisplayModel
+    // Default selected Tab
+    @State private var selectedTab: NextToGoDisplayModel.FilterOption = .all
+    
 
+
+    init(viewModel: NextToGoViewModel) {
+        self.viewModel = viewModel
+        self.displayModel = viewModel.nextToGoDisplayModel
+    }
+    
     var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Label(
-                    title: {
-                        Text(EntainStrings.NextToGo.title)
-                            .font(.headline)
-                            .foregroundStyle(.white)
-                    },
-                    icon: {
-                        Image(.nextToGo)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(.white)
-                            .frame(width: 30, height: 30)
+        ZStack {
+            VStack {
+                HeaderView()
+                if displayModel.filteredRacesListDisplayModel.isEmpty {
+                    // Display Empty View
+                    EmptyStateView() {
+                        // Refresh view
+                        viewModel.refresh()
                     }
-                )
-                .padding(.leading, 8)
-                ButtonFilterView(displayModel: viewModel.nextToGoDisplayModel.allFilterDisplayModel) { title in
-                    print("tapped \(title)")
+                    Spacer()
+                } else {
+                    List {
+                        Section {
+                            ForEach(displayModel.filteredRacesListDisplayModel, id: \.uuid) { raceViewModel in
+                                RaceItemView(viewModel: raceViewModel)
+                            }
+                        } header: {
+                            Text(EntainStrings.NextToGo.Section.title)
+                                .font(.subheadline)
+                                .foregroundStyle(.black)
+                        }
+                    }
+                    .scrollContentBackground(.hidden)
+                    .background(Color.clear)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.black)
-
-            let raceData = viewModel.nextToGoDisplayModel.filteredRacesListDisplayModel
-            if raceData.isEmpty {
-                Text("No races available.")
+            VStack {
                 Spacer()
-            } else {
-                List {
-                    ForEach(raceData, id: \.uuid) { raceViewModel in
-                        RaceItemView(viewModel: raceViewModel)
-                    }
+                CustomSegmentedControl(
+                    displayModel: displayModel.allFilterDisplayModel,
+                    selectedTab: $selectedTab
+                ) { title in
+                    viewModel.updateFilter(to: .init(rawValue: title) ?? .all)
                 }
-                .scrollContentBackground(.hidden)
-                .background(Color.clear)
             }
         }
         .background(Color.accentColor)

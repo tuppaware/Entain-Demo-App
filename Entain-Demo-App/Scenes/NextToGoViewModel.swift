@@ -24,7 +24,6 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
     private let interactor: NextToGoInteractorProtocol
     private var cancellables = Set<AnyCancellable>()
     private let timerManager: CentralTimerManager
-    private(set) var raceData: RaceData?
     
     // MARK: - Initialization
     init(
@@ -45,9 +44,9 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] raceData in
                 guard let self = self else { return }
-                self.raceData = raceData
                 self.isLoading = false
                 self.nextToGoDisplayModel.currentRaces = raceData
+                self.nextToGoDisplayModel.filterRaces(.all)
             }
             .store(in: &cancellables)
 
@@ -63,24 +62,7 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
 //                .store(in: &cancellables)
 //        }
     }
-    
-    private func subscribeToTimers() {
-        // Monitor all timers in CentralTimerManager
-        timerManager.$timers
-            .sink { [weak self] timers in
-                self?.updateActiveTimers(with: timers)
-            }
-            .store(in: &cancellables)
-    }
-    
-    // TODO: - refactor to something nicer
-    private func updateActiveTimers(with timers: [UUID: TimerItem]) {
-        let timerIds = timers.filter { (0...1).contains($0.value.remainingTime) }.map { $0.key }
-        // retrigger displayModel
-        if !timerIds.isEmpty {
-            self.nextToGoDisplayModel.currentRaces = raceData
-        }
-    }
+
 
     // MARK: - Public Methods
     func refresh() {
@@ -89,6 +71,6 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
     }
 
     func updateFilter(to newFilter: NextToGoDisplayModel.FilterOption) {
-        nextToGoDisplayModel.filter = newFilter
+        nextToGoDisplayModel.filterRaces(newFilter)
     }
 }
