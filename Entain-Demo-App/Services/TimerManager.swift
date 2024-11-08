@@ -15,16 +15,16 @@ struct TimerItem {
 }
 
 /// A class to manage multiple timers centrally and publish updates.
-class CentralTimerManager: ObservableObject {
+class TimerManager: ObservableObject, TimerManagerProtocol {
     /// A dictionary of timer items managed by their UUID.
     @Published private(set) var timers: [UUID: TimerItem] = [:]
     
     private var timerCancellables: [UUID: AnyCancellable] = [:]
-    private let timerInterval: TimeInterval = 1.0 // Set the update frequency, 0.5 seconds otherwise the value often falls between 0...1
+    private let timerInterval: TimeInterval = 1.0
     private let timerQueue = DispatchQueue(label: "centralTimerQueue")
     
     /// Singleton instance for centralized access.
-    static let shared = CentralTimerManager()
+    static let shared = TimerManager()
     
     private init() {}
     

@@ -12,7 +12,7 @@ import NetworkingManager
 struct EntainDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            let interactor = NextoGoInteractor(networkService: NetworkingManager())
+            let interactor = NextToGoInteractor(networkService: NetworkingManager())
             let viewModel = NextToGoViewModel(interactor: interactor)
             NextToGoView(viewModel: viewModel)
         }

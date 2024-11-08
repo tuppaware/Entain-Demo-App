@@ -14,16 +14,17 @@ enum RaceCategory: String, Codable, CaseIterable {
     case harnessRacing = "4a2788f8-e825-4d36-9894-efd4baf1cfae"
     case all = ""
     
-    var displayIcon: Image {
+    // Return the correct image for the selected Race Category
+    var displayIcon: Image? {
         switch self {
         case .all:
-            return Image(.nextToGo)
+            return nil
         case .greyhoundRacing:
-            return Image(.greyhoundRacing)
+            return Image(.greyhoundFilter)
         case .horseRacing:
-            return Image(.horseRacing)
+            return Image(.horseFilter)
         case .harnessRacing:
-            return Image(.harnessRacing)
+            return Image(.harnessFilter)
         }
     }
 }

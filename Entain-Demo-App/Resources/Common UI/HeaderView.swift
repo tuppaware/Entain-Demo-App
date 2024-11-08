@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Generic Header View for Reuse
 struct HeaderView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {

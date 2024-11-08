@@ -9,27 +9,39 @@ import Foundation
 import SwiftUI
 import FlagKit
 
-public protocol RaceItemViewModelProtocol {
-    var raceNumber: Int { get }
-    var meetingName: String { get }
-    var image: Image { get }
-    var countryName: String { get }
-    var timerID: UUID { get }
-    func setLoading(_ isLoading: Bool)
-}
-
+/// ViewModel representing a single race item, with countdown timer and related UI data
 public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObject {
+    
     // MARK: - Properties
+    
+    /// Race number displayed on the UI
     @Published private(set) public var raceNumber: Int
+    
+    /// Name of the meeting associated with the race
     @Published private(set) public var meetingName: String
+    
+    /// Image representing the race type or category
     @Published private(set) public var image: Image
+    
+    /// Name of the country where the race is held
     @Published private(set) public var countryName: String
+    
+    /// Flag to indicate whether the race item is loading
     @Published private var isLoading: Bool = false
-    @Published private var countDownTime: Int?
+    
+    /// Time remaining until race start, in seconds
+    @Published private(set) public var countDownTime: Int?
+    
+    /// Unique identifier for managing countdown timers
     private(set) public var timerID: UUID
+    
+    /// A UUID for uniquely identifying each instance of `RaceItemViewModel`
     public let uuid: UUID = .init()
-
-    // Computed count down string
+    
+    // MARK: - Computed Properties
+    
+    /// Converts the countdown time into a readable string format
+    /// - Returns: A string representation of the countdown (e.g., "5m 30s")
     var countdownString: String {
         guard let countDownTime else { return "" }
             
@@ -58,15 +70,26 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
         return components.joined(separator: " ")
     }
     
-    // Optional Flag image for country of Race
+    /// Retrieves an optional flag image based on the country code.
+    /// This is best effort, as truncating 3 code to 2 sometimes doesnt return the right flag
+    /// - Returns: An optional `Image` displaying the country's flag
     public var flagCountryCode: Image? {
-        if let imageAsset = Flag( countryCode: String(countryName.prefix(2)))?.originalImage {
+        if let imageAsset = Flag(countryCode: String(countryName.prefix(2)))?.originalImage {
             return Image(uiImage: imageAsset)
         } else {
             return nil
         }
     }
 
+    // MARK: - Initializer
+    
+    /// Initializes a new instance of `RaceItemViewModel`.
+    /// - Parameters:
+    ///   - raceNumber: The number of the race
+    ///   - meetingName: The name of the meeting location
+    ///   - image: The image representing the race type
+    ///   - countryName: The name of the country hosting the race
+    ///   - timerID: Unique ID for the countdown timer
     public init(
         raceNumber: Int,
         meetingName: String,
@@ -81,10 +104,16 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
         self.timerID = timerID
     }
 
+    // MARK: - Methods
+    
+    /// Sets the loading state of the view model.
+    /// - Parameter isLoading: Boolean indicating if the view model is loading
     public func setLoading(_ isLoading: Bool) {
         self.isLoading = isLoading
     }
     
+    /// Updates the countdown timer with the remaining time.
+    /// - Parameter countdown: The countdown time in seconds
     public func setCountdown(_ countdown: Int) {
         self.countDownTime = countdown
     }

@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-// Skeleton View for the
+// Skeleton View for the Loading state
 public struct RaceItemSkeletonView: View {
     
     public init (){}
     
+    // Generate 5x list item views 
     public var body: some View {
         ForEach(0..<5, id: \.self) { _ in
             SkeletonView()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Shimmer Modifier
+// Shimmer Modifier Effect used in Skeleton Views for loading
 struct Shimmer: ViewModifier {
     @State private var phase: CGFloat = 0.0
 

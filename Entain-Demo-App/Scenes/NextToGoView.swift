@@ -4,17 +4,20 @@
 //
 //  Created by Adam Ware on 5/11/2024.
 //
+
 import SwiftUI
 import SharedUI
 import NetworkingManager
 
-/// Next to Go View,
+/// A view displaying the "Next to Go" races, with filtering and loading states.
 struct NextToGoView: View {
-    // View Model - handling binding interactor and error states
+    // ViewModel handling interaction logic and error states
     @ObservedObject var viewModel: NextToGoViewModel
-    // Display Model - handling data transformation
+    
+    // DisplayModel transforming and managing data for display
     @ObservedObject var displayModel: NextToGoDisplayModel
-    // Default selected Tab
+    
+    // The currently selected filter tab
     @State private var selectedTab: NextToGoDisplayModel.FilterOption = .all
     
     init(viewModel: NextToGoViewModel) {
@@ -25,10 +28,10 @@ struct NextToGoView: View {
     var body: some View {
         ZStack {
             VStack {
-                // Header View
+                // Header
                 HeaderView()
                 
-                // Loading Skeleton View if loading
+                // Show loading skeleton view if data is loading
                 if viewModel.isLoading {
                     List {
                         Section {
@@ -42,8 +45,7 @@ struct NextToGoView: View {
                     .scrollContentBackground(.hidden)
                     .background(Color.clear)
                 } else {
-                    
-                    // Show races is not loading
+                    // Show race items when not loading
                     List {
                         Section {
                             ForEach(displayModel.filteredRacesListDisplayModel, id: \.uuid) { raceViewModel in
@@ -57,11 +59,14 @@ struct NextToGoView: View {
                             }
                         }
                     }
+                    .refreshable {
+                        await viewModel.refresh()
+                    }
                     .scrollContentBackground(.hidden)
                     .background(Color.clear)
                 }
             }
-            // Segment Control for filters 
+            // Filter control for selecting race categories
             CustomSegmentedControl(
                 displayModel: displayModel.allFilterDisplayModel,
                 selectedTab: $selectedTab
@@ -74,7 +79,7 @@ struct NextToGoView: View {
 }
 
 #Preview {
-    let interactor = NextoGoInteractor(
+    let interactor = NextToGoInteractor(
         networkService: NetworkingManager()
     )
     let viewModel = NextToGoViewModel(interactor: interactor)

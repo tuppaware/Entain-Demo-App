@@ -10,120 +10,141 @@ import Combine
 import NetworkingManager
 
 /// Protocol defining the requirements for the Next To Go interactor
+@MainActor
 protocol NextToGoInteractorProtocol: AnyObject {
-    /// Race data from the API
+    /// Race data from the API, holding the latest races information
     var nextToGoRaces: RaceData? { get }
-
+    
+    /// Publisher for next-to-go race data updates
     var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> { get }
     
+    /// Publisher for error updates
     var errorPublisher: AnyPublisher<NetworkingErrors, Never> { get }
     
+    /// Triggers a data refresh by fetching new race data
     func refreshData()
 }
 
-final class NextoGoInteractor: NextToGoInteractorProtocol {
-    // Network Service
+/// Interactor class for managing and refreshing "Next To Go" race data
+@MainActor
+final class NextToGoInteractor: NextToGoInteractorProtocol, ObservableObject {
+    // MARK: - Properties
+    
+    /// Network service used to perform network requests
     private let networkService: NetworkServiceProtocol
-    // AnyCancellable to manage memory for Combine subscriptions
-    private var cancellables: Set<AnyCancellable> = []
-    // Timer to refresh data
+    
+    /// Timer instance to periodically refresh race data
     private var refreshTimer: Timer?
-    // Refresh interval
+    
+    /// Time interval for refreshing data automatically (in seconds)
     private let refreshInterval: TimeInterval = 60
-    // A TimerManager for handling count down timing on races
-    private let timerManager: CentralTimerManager
-    // Published Race data
+    
+    /// TimerManager instance to handle countdown timing on races
+    private let timerManager: TimerManager
+    
+    /// Published property holding the latest race data
     @Published var nextToGoRaces: RaceData?
-    // Error publisher
+    
+    /// Subject for publishing errors encountered during data fetch
     private let errorSubject = PassthroughSubject<NetworkingErrors, Never>()
     
+    /// Publisher exposing next-to-go race data updates for external subscribers
     var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> {
         $nextToGoRaces.eraseToAnyPublisher()
     }
     
+    /// Publisher exposing errors for external subscribers
     var errorPublisher: AnyPublisher<NetworkingErrors, Never> {
         errorSubject.eraseToAnyPublisher()
     }
     
+    // MARK: - Initialization
+    
+    /// Initializes the NextToGoInteractor with a network service and timer manager
+    /// - Parameters:
+    ///   - networkService: The network service used to fetch race data
+    ///   - timerManager: Timer manager for handling countdowns, defaults to shared instance
     init(
         networkService: NetworkServiceProtocol,
-        timerManager: CentralTimerManager = CentralTimerManager.shared
+        timerManager: TimerManager = TimerManager.shared
     ) {
         self.networkService = networkService
         self.timerManager = timerManager
     }
     
-    public func refreshData() {
-        // Start the data fetching process
+    // MARK: - Public Methods
+    
+    /// Public method to start the data refresh process
+    func refreshData() {
+        // Initiates fetching of the next-to-go races from the server
         fetchNextToGoFromServer()
     }
     
-    /// Fetches "Next To Go" data from the server and sets up a timer to refresh data
+    // MARK: - Private Methods
+    
+    /// Fetches "Next To Go" data from the server and sets up a timer to periodically refresh data
     private func fetchNextToGoFromServer() {
-        // Cancel any existing timer
+        // Cancel any active refresh timer to prevent overlap
         refreshTimer?.invalidate()
         refreshTimer = nil
         
-        // Sends a network request to fetch "Next To Go" data, expecting a `RaceData` response
-        // Bumped results to 30, so that we can get a larger range of races in a category
-        // Handy if a category of races starts soon but would be bumped by more races in other categories.
-        networkService.performRequest(
-            endpoint: .nextToGo(20),
-            type: RaceData.self
-        )
-        .sink(
-            receiveCompletion: { [weak self] completion in
-                guard let self = self else { return }
-                // Handles the completion of the request
-                switch completion {
-                case .finished:
-                    // Schedule the next fetch after refreshInterval seconds
-                    self.refreshTimer = Timer.scheduledTimer(
-                        withTimeInterval: self.refreshInterval,
-                        repeats: false
-                    ) { [weak self] _ in
-                        self?.fetchNextToGoFromServer()
-                    }
-                case .failure(let error):
-                    // Handle errors by passing them to the `handleError` function
-                    self.handleError(error)
+        // Start an asynchronous task to perform the network request
+        Task {
+            do {
+                // Perform the async network request using async/await
+                let data = try await networkService.performRequest(
+                    endpoint: .nextToGo(20),
+                    type: RaceData.self
+                )
+                
+                // Update the published race data
+                // Want to really make sure the publisher is run from main thread.
+                await MainActor.run {
+                    print("new data recieved")
+                    self.nextToGoRaces = data
                 }
-            },
-            receiveValue: { [weak self] data in
-                guard let self = self else { return }
-                print("Received data")
-                self.nextToGoRaces = data
+                
+                // Schedule the next fetch after `refreshInterval` seconds
+                self.scheduleNextFetch()
+            } catch let networkingError as NetworkingErrors {
+                // Handle known networking errors
+                self.handleError(networkingError)
+            } catch {
+                // Handle unknown errors by mapping to `.unknown`
+                self.handleError(.unknown)
             }
-        )
-        .store(in: &cancellables)
+        }
     }
     
-    // MARK: - Private methods
+    /// Schedules the next data fetch after the specified interval.
+    private func scheduleNextFetch() {
+        // Schedule the next fetch after `refreshInterval` seconds.
+        self.refreshTimer = Timer.scheduledTimer(
+            withTimeInterval: self.refreshInterval,
+            repeats: false
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            // Initiate an asynchronous task to call the @MainActor-isolated method.
+            Task { [weak self] in
+                await self?.fetchNextToGoFromServer()
+            }
+        }
+    }
     
-    /// Handles network-related errors and provides specific error messages
+    /// Handles network-related errors and schedules the next data fetch
     /// - Parameter error: The error encountered during the network request
-    private func handleError(_ error: Error) {
-        // Cast to Network Error
-        if let networkingError = error as? NetworkingErrors {
-            errorSubject.send(networkingError)
-        } else {
-            // Handles other types of errors not related to networking
-            print("Error: \(error.localizedDescription)")
-        }
+    private func handleError(_ error: NetworkingErrors) {
+        // Publish the error to subscribers
+        errorSubject.send(error)
         
-        // Schedule the next fetch after refreshInterval seconds even if there's an error
-        refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: false) { [weak self] _ in
-            guard let self else { return }
-            self.fetchNextToGoFromServer()
-        }
+        // Schedule the next fetch after `refreshInterval` seconds even if there's an error
+        self.scheduleNextFetch()
     }
     
+    /// Cleans up timers to prevent memory leaks
     deinit {
-        // We are using [weak self] in the timer's closure to avoid retain cycles,
-        // it's good practice to clean up any timers or observers when they are no longer needed.
+        // Invalidate and remove any active refresh timer
         refreshTimer?.invalidate()
         refreshTimer = nil
-        // Cancel all Combine subscriptions
-        cancellables.forEach { $0.cancel() }
     }
 }
