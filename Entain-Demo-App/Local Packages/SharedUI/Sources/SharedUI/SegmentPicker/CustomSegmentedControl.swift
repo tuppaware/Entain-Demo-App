@@ -25,38 +25,48 @@ public struct CustomSegmentedControl<Tab: TabRepresentable>: View {
     }
     
     public var body: some View {
-        HStack(spacing: 0) {
-            ForEach(displayModel.tabs) { tab in
-                ZStack {
-                    if selectedTab == tab {
-                        RoundedRectangle(cornerRadius: 32)
-                            .fill(Color.gray)
-                            .matchedGeometryEffect(id: "background", in: animation)
+        VStack {
+            Spacer()
+            HStack(spacing: 0) {
+                ForEach(displayModel.tabs) { tab in
+                    ZStack {
+                        if selectedTab == tab {
+                            RoundedRectangle(cornerRadius: 32)
+                                .fill(Color.gray)
+                                .matchedGeometryEffect(id: "background", in: animation)
+                        }
+                        if let icon = tab.displayIcon {
+                            icon
+                                .resizable()
+                                .renderingMode(.template)
+                                .scaledToFit()
+                                .padding(2)
+                                .foregroundColor(selectedTab == tab ? .white : .black)
+                                .accessibilityAddTraits(.isButton)
+                                .accessibilityLabel(tab.displayTitle)
+                                .accessibilityHint("Enables filtering by \(tab.displayTitle)")
+                        } else {
+                            Text(tab.displayTitle)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .fontWeight(.semibold)
+                                .foregroundColor(selectedTab == tab ? .white : .black)
+                        }
                     }
-                    Text(tab.displayTitle)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .fontWeight(.semibold)
-                        .foregroundColor(selectedTab == tab ? .white : .gray)
-                }
-                .contentShape(Rectangle()) // Makes the entire area tappable
-                .onTapGesture {
-                    withAnimation(.easeInOut) {
-                        selectedTab = tab
-                        buttonAction(tab.displayTitle)
+                    .contentShape(Rectangle()) // Makes the entire area tappable
+                    .frame(maxWidth: .infinity, minHeight: 46)
+                    .onTapGesture {
+                        withAnimation(.easeInOut) {
+                            selectedTab = tab
+                            buttonAction(tab.displayTitle)
+                        }
                     }
                 }
             }
+            .background(.regularMaterial)
+            .cornerRadius(32)
+            .frame(maxWidth: .infinity, maxHeight: 46)
+            .padding(.horizontal, 32)
         }
-        .background(.regularMaterial)
-        .cornerRadius(32)
-        .frame(maxWidth: .infinity, maxHeight: 42)
-        .padding(.horizontal, 32)
     }
 }
-
-
-
-//#Preview {
-//    CustomSegmentedControl()
-//}

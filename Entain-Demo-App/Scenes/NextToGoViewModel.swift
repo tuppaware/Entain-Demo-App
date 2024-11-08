@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkingManager
 import Combine
 
 protocol NextToGoViewModelProtocol: ObservableObject {
@@ -18,7 +19,7 @@ protocol NextToGoViewModelProtocol: ObservableObject {
 class NextToGoViewModel: NextToGoViewModelProtocol {
     // MARK: - Published Properties
     @Published var nextToGoDisplayModel: NextToGoDisplayModel
-    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var isLoading: Bool = true
 
     // MARK: - Private Properties
     private let interactor: NextToGoInteractorProtocol
@@ -34,7 +35,6 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
         self.timerManager = timerManager
         self.nextToGoDisplayModel = NextToGoDisplayModel(timerManager: timerManager)
         setupBindings()
-        // subscribeToTimers()
         refresh() // Initial data load
     }
 
@@ -44,25 +44,39 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] raceData in
                 guard let self = self else { return }
-                self.isLoading = false
-                self.nextToGoDisplayModel.currentRaces = raceData
-                self.nextToGoDisplayModel.filterRaces(.all)
+                // a sneaky little delay to add time to show skeleton loading ;-)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.isLoading = false
+                    self.nextToGoDisplayModel.currentRaces = raceData
+                    self.nextToGoDisplayModel.filterRaces(.all)
+                }
             }
             .store(in: &cancellables)
 
-        // Optional: Handle errors if interactor publishes them
         // TODO: - add error publisher 
-//        if let errorPublisher = interactor.errorPublisher {
-//            errorPublisher
-//                .receive(on: DispatchQueue.main)
-//                .sink { [weak self] error in
-//                    self?.isLoading = false
-//                    // Handle the error (e.g., set an error message)
-//                }
-//                .store(in: &cancellables)
-//        }
+        interactor.errorPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] error in
+                self?.handleError(error)
+            }
+            .store(in: &cancellables)
     }
-
+    
+    private func handleError(_ error: NetworkingErrors) {
+        // Network Error
+        switch error {
+        case .invalidDecoding:
+            print("Failed to decode the response.")
+        case .invalidHTTPResponse:
+            print("Invalid HTTP response.")
+        case .serverError(let statusCode):
+            print("Server error with status code: \(statusCode)")
+        case .unknown:
+            print("An unknown error occurred.")
+        case .invalidURL:
+            print("Invalid URL")
+        }
+    }
 
     // MARK: - Public Methods
     func refresh() {
@@ -70,6 +84,7 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
         interactor.refreshData()
     }
 
+    // Updates the filter from the view and triggers a layout change in the display model
     func updateFilter(to newFilter: NextToGoDisplayModel.FilterOption) {
         nextToGoDisplayModel.filterRaces(newFilter)
     }

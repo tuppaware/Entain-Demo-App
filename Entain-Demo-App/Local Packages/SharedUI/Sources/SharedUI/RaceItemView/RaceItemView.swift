@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import FlagKit
 
+//todo: - Accessaiblty strings in copy
 public struct RaceItemView: View {
     
-    @ObservedObject
-    var viewModel: RaceItemViewModel
+    @ObservedObject var viewModel: RaceItemViewModel
     
     public init(viewModel: RaceItemViewModel) {
         self.viewModel = viewModel
@@ -33,13 +34,20 @@ public struct RaceItemView: View {
                     .monospacedDigit()
                     .font(.subheadline)
                     .foregroundColor(.primary)
-                Text(viewModel.countryName)
-                    .font(.footnote)
-                    .foregroundColor(.primary)
+                if let image = viewModel.flagCountryCode {
+                    image
+                        .scaledToFit()
+                        .frame(height: 20)
+                } else {
+                    Text(viewModel.countryName)
+                        .font(.footnote)
+                        .foregroundColor(.primary)
+                }
             }
         }
         .accessibilityLabel("Countdown to race start \(viewModel.meetingName) R\(viewModel.raceNumber) \(viewModel.countdownString)")
         .padding(.vertical, 8)
+        .transition(.opacity)
     }
 }
 

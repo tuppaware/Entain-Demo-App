@@ -26,11 +26,14 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum Asset {
   internal static let accentColor = ColorAsset(name: "AccentColor")
   internal static let blueAccentColor = ColorAsset(name: "BlueAccentColor")
+  internal static let greyhoundFilter = ImageAsset(name: "greyhoundFilter")
+  internal static let harnessFilter = ImageAsset(name: "harnessFilter")
+  internal static let horseFilter = ImageAsset(name: "horseFilter")
+  internal static let infoState = ImageAsset(name: "info-state")
+  internal static let nextToGo = ImageAsset(name: "NextToGo")
   internal static let greyhoundRacing = ImageAsset(name: "greyhoundRacing")
   internal static let harnessRacing = ImageAsset(name: "harnessRacing")
   internal static let horseRacing = ImageAsset(name: "horseRacing")
-  internal static let infoState = ImageAsset(name: "info-state")
-  internal static let nextToGo = ImageAsset(name: "NextToGo")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

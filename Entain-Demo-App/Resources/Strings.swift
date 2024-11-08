@@ -11,6 +11,18 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum EntainStrings {
   internal enum InfoState {
+    internal enum Error {
+      /// Well this is awkward, looks like we have an %@ error. Give it another shot?
+      internal static func description(_ p1: Any) -> String {
+        return EntainStrings.tr("Copy", "InfoState.Error.Description", String(describing: p1), fallback: "Well this is awkward, looks like we have an %@ error. Give it another shot?")
+      }
+      /// Whoops, looks like an Error
+      internal static let title = EntainStrings.tr("Copy", "InfoState.Error.Title", fallback: "Whoops, looks like an Error")
+      internal enum PrimaryCTA {
+        /// Try again
+        internal static let title = EntainStrings.tr("Copy", "InfoState.Error.PrimaryCTA.Title", fallback: "Try again")
+      }
+    }
     internal enum NoRaces {
       /// Whoops, looks like we dont have any races to show you at the moment.
       internal static let description = EntainStrings.tr("Copy", "InfoState.NoRaces.Description", fallback: "Whoops, looks like we dont have any races to show you at the moment.")
@@ -29,8 +41,10 @@ internal enum EntainStrings {
     ///   Created by Adam Ware on 5/11/2024.
     internal static let title = EntainStrings.tr("Copy", "NextToGo.Title", fallback: "Entain Demo App")
     internal enum Section {
-      /// Next to go races
-      internal static let title = EntainStrings.tr("Copy", "NextToGo.Section.Title", fallback: "Next to go races")
+      /// Next to go races %@
+      internal static func title(_ p1: Any) -> String {
+        return EntainStrings.tr("Copy", "NextToGo.Section.Title", String(describing: p1), fallback: "Next to go races %@")
+      }
     }
   }
 }

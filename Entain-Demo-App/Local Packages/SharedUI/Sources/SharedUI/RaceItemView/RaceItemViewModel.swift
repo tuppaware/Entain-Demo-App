@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import FlagKit
 
 public protocol RaceItemViewModelProtocol {
     var raceNumber: Int { get }
@@ -54,8 +55,16 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
             return ""
         }
 
-        
         return components.joined(separator: " ")
+    }
+    
+    // Optional Flag image for country of Race
+    public var flagCountryCode: Image? {
+        if let imageAsset = Flag( countryCode: String(countryName.prefix(2)))?.originalImage {
+            return Image(uiImage: imageAsset)
+        } else {
+            return nil
+        }
     }
 
     public init(

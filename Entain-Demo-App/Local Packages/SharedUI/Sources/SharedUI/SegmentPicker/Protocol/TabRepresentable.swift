@@ -11,7 +11,7 @@ import SwiftUI
 // Define a protocol that represents a tab
 public protocol TabRepresentable: Identifiable, Equatable {
     var displayTitle: String { get }
-    var displayIcon: Image { get }
+    var displayIcon: Image? { get }
     var categoryID: String { get }
 }
 
@@ -19,12 +19,12 @@ public protocol TabRepresentable: Identifiable, Equatable {
 public struct TabModel: TabRepresentable {
     public let id: UUID = UUID()
     public let displayTitle: String
-    public let displayIcon: Image
+    public let displayIcon: Image?
     public let categoryID: String
 
     public init(
         displayTitle: String,
-        displayIcon: Image,
+        displayIcon: Image?,
         categoryID: String
     ) {
         self.displayTitle = displayTitle

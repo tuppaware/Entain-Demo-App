@@ -13,8 +13,10 @@ import NetworkingManager
 protocol NextToGoInteractorProtocol: AnyObject {
     /// Race data from the API
     var nextToGoRaces: RaceData? { get }
-    
+
     var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> { get }
+    
+    var errorPublisher: AnyPublisher<NetworkingErrors, Never> { get }
     
     func refreshData()
 }
@@ -24,18 +26,23 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     private let networkService: NetworkServiceProtocol
     // AnyCancellable to manage memory for Combine subscriptions
     private var cancellables: Set<AnyCancellable> = []
-    // Timer to refresh data every 60 seconds
-    private var refreshTimerID: UUID?
-    // Refresh timer
-    // TODO: - formalise this value
-    private let refreshInterval: TimeInterval = 30
+    // Timer to refresh data
+    private var refreshTimer: Timer?
+    // Refresh interval
+    private let refreshInterval: TimeInterval = 60
     // A TimerManager for handling count down timing on races
     private let timerManager: CentralTimerManager
     // Published Race data
     @Published var nextToGoRaces: RaceData?
+    // Error publisher
+    private let errorSubject = PassthroughSubject<NetworkingErrors, Never>()
     
     var nextToGoRacesPublisher: AnyPublisher<RaceData?, Never> {
         $nextToGoRaces.eraseToAnyPublisher()
+    }
+    
+    var errorPublisher: AnyPublisher<NetworkingErrors, Never> {
+        errorSubject.eraseToAnyPublisher()
     }
     
     init(
@@ -44,40 +51,46 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     ) {
         self.networkService = networkService
         self.timerManager = timerManager
-        //self.startDataRefreshTimer()
     }
     
     public func refreshData() {
-        Task {
-            do {
-                try await self.fetchNextToGoFromServer()
-            } catch {
-                self.handleError(error)
-            }
-        }
+        // Start the data fetching process
+        fetchNextToGoFromServer()
     }
     
-    /// Fetches "Next To Go" data from the server asynchronously
-    /// - Throws: An error if the network request fails
-    private func fetchNextToGoFromServer() async throws {
+    /// Fetches "Next To Go" data from the server and sets up a timer to refresh data
+    private func fetchNextToGoFromServer() {
+        // Cancel any existing timer
+        refreshTimer?.invalidate()
+        refreshTimer = nil
+        
         // Sends a network request to fetch "Next To Go" data, expecting a `RaceData` response
+        // Bumped results to 30, so that we can get a larger range of races in a category
+        // Handy if a category of races starts soon but would be bumped by more races in other categories.
         networkService.performRequest(
-            endpoint: .nextToGo(10),
+            endpoint: .nextToGo(20),
             type: RaceData.self
         )
         .sink(
-            receiveCompletion: { completion in
+            receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
                 // Handles the completion of the request
                 switch completion {
                 case .finished:
-                    break
+                    // Schedule the next fetch after refreshInterval seconds
+                    self.refreshTimer = Timer.scheduledTimer(
+                        withTimeInterval: self.refreshInterval,
+                        repeats: false
+                    ) { [weak self] _ in
+                        self?.fetchNextToGoFromServer()
+                    }
                 case .failure(let error):
                     // Handle errors by passing them to the `handleError` function
                     self.handleError(error)
                 }
             },
             receiveValue: { [weak self] data in
-                guard let self else { return }
+                guard let self = self else { return }
                 print("Received data")
                 self.nextToGoRaces = data
             }
@@ -87,64 +100,30 @@ final class NextoGoInteractor: NextToGoInteractorProtocol {
     
     // MARK: - Private methods
     
-    private func startDataRefreshTimer() {
-        // Initialize a repeating timer using CentralTimerManager
-        let timerID = timerManager.addTimer(duration: refreshInterval)
-        refreshTimerID = timerID
-        
-        // Subscribe to timer updates, triggering only when the timer reaches the final second
-        timerManager.$timers
-            .filter { timers in
-                guard let timer = timers[timerID] else { return false }
-                return timer.remainingTime <= 1
-            }
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-                
-                // Trigger the API call asynchronously
-                Task {
-                    do {
-                        print("here")
-                        try await self.fetchNextToGoFromServer()
-                    } catch {
-                        self.handleError(error)
-                    }
-                }
-                
-                // Reset the timer to maintain continuous data refreshes
-                self.timerManager.resetTimer(for: timerID, duration: self.refreshInterval)
-            }
-            .store(in: &cancellables)
-    }
-    
     /// Handles network-related errors and provides specific error messages
     /// - Parameter error: The error encountered during the network request
     private func handleError(_ error: Error) {
-        // TODO: - Handle error with using cached data, and informing the user
-        // Casts the error to `NetworkingErrors` to handle specific cases
+        // Cast to Network Error
         if let networkingError = error as? NetworkingErrors {
-            switch networkingError {
-            case .invalidDecoding:
-                print("Failed to decode the response.")
-            case .invalidHTTPResponse:
-                print("Invalid HTTP response.")
-            case .serverError(let statusCode):
-                print("Server error with status code: \(statusCode)")
-            case .unknown:
-                print("An unknown error occurred.")
-            case .invalidURL:
-                print("Invalid URL")
-            }
+            errorSubject.send(networkingError)
         } else {
             // Handles other types of errors not related to networking
             print("Error: \(error.localizedDescription)")
         }
+        
+        // Schedule the next fetch after refreshInterval seconds even if there's an error
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: false) { [weak self] _ in
+            guard let self else { return }
+            self.fetchNextToGoFromServer()
+        }
     }
     
-    /// Deinitializes the timer
     deinit {
-        if let refreshTimerID = refreshTimerID {
-            timerManager.removeTimer(for: refreshTimerID)
-        }
+        // We are using [weak self] in the timer's closure to avoid retain cycles,
+        // it's good practice to clean up any timers or observers when they are no longer needed.
+        refreshTimer?.invalidate()
+        refreshTimer = nil
+        // Cancel all Combine subscriptions
+        cancellables.forEach { $0.cancel() }
     }
 }

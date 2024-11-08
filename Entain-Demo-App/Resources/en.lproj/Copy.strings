@@ -6,9 +6,13 @@
   
 */
 "NextToGo.Title" = "Entain Demo App";
-"NextToGo.Section.Title" = "Next to go races";
+"NextToGo.Section.Title" = "%@ Races Next To Go";
 
 // Info and Error States
 "InfoState.NoRaces.Title" = "No races scheduled";
 "InfoState.NoRaces.Description" = "Whoops, looks like we dont have any races to show you at the moment.";
 "InfoState.NoRaces.PrimaryCTA.Title" = "Check again";
+
+"InfoState.Error.Title" = "Whoops, looks like an Error";
+"InfoState.Error.Description" = "Well this is awkward, looks like we have an %@ error. Give it another shot?";
+"InfoState.Error.PrimaryCTA.Title" = "Try again";

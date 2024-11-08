@@ -9,19 +9,24 @@ let package = Package(
         .iOS(.v17),
        ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SharedUI",
             targets: ["SharedUI"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/madebybowtie/FlagKit.git", .upToNextMajor(from: "2.4.0"))
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SharedUI"),
+            name: "SharedUI",
+            dependencies: [
+                .product(name: "FlagKit", package: "FlagKit")
+            ],
+            resources: nil
+        ),
         .testTarget(
             name: "SharedUITests",
             dependencies: ["SharedUI"]
-        ),
+        )
     ]
 )
