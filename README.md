@@ -140,6 +140,19 @@ There are `Common UI` elements within the project itself, that build on reusable
   - Pull to refresh.
   - Animated Loading Skeleton screen
   - Error state screen with retry button.
+ 
+## Screen Shots 
+Error State 
+
+![Simulator Screenshot - iPhone 16 Pro - 2024-11-11 at 10 34 56 Medium](https://github.com/user-attachments/assets/3bf8e482-5ca1-4c63-944c-4e9b5d1d588d)
+
+Loading State 
+
+![Simulator Screenshot - iPhone 16 Pro - 2024-11-11 at 10 35 14 Medium](https://github.com/user-attachments/assets/a2a65476-2b66-4268-a8c4-5de7503e0f5b)
+
+Races Loaded 
+
+![Simulator Screenshot - iPhone 16 Pro - 2024-11-11 at 10 35 18 Medium](https://github.com/user-attachments/assets/1e560cc1-b142-4eb1-b036-af5f9edc627a)
 
 ## Contact
 
