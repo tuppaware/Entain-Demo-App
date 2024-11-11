@@ -59,15 +59,15 @@ There are `Common UI` elements within the project itself, that build on reusable
 
     - **Purpose:** Encapsulates all networking-related functionalities, ensuring that networking logic is decoupled from the rest of the app. This promotes reusability and easier maintenance.
     - **Components:**
-        - **NetworkingManager:** Singleton class responsible for making API requests and handling responses.
+        - **NetworkingManager:** Class responsible for making API requests and handling responses.
         - **APIEndpoints:** Enum or struct defining all API endpoints used within the app.
         - **NetworkError:** Defines various networking errors for robust error handling.
 
 2. **Local Package : SharedUI**
 
-    - **Purpose:** Houses all reusable UI components, custom controls, and shared styles, promoting consistency and reducing code duplication across the app.
+    - **Purpose:** Houses all reusable UI components, custom controls, promoting consistency and reducing code duplication across the app.
     - **Components:**
-        - **CustomSegmentedControl:** A customizable segmented control for navigation.
+        - **CustomSegmentedControl:** A customizable segmented control for filter options.
         - **RaceItemView:** A reusable view representing a single race item.
         - **InfoStateView:** A reusable informational view used to show empty and error driven states.
 
@@ -95,7 +95,7 @@ There are `Common UI` elements within the project itself, that build on reusable
 - **SharedUI:** Custom local package for reusable UI components.
 
 #### External Dependencies
-- **FlagKit:** Just flag images to improve the visual appeal of the list view.
+- **FlagKit:** Just flag image package to improve the visual appeal of the list view.
 - **SwiftLint:** Swift formating and linting
 - **SwiftGen:** Provides type safe strings for localisation. 
 
@@ -108,14 +108,14 @@ There are `Common UI` elements within the project itself, that build on reusable
     - `NextToGoInteractor` communicates with the `NetworkingManager` to retrieve data and publish it to a Combine publisher.
 
 3. **ViewModel Updates:**
-    - Upon receiving data from the `Interactor`, `NextToGoViewModel` updates its `races` property, which is observed by `NextToGoDisplayModel`.
+    - Upon receiving data from the `NextToGoInteractor`, `NextToGoViewModel` updates its `races` property, which is observed by `NextToGoDisplayModel`.
     - `NextToGoDisplayModel` uses the `races` property to filter races and manage countdown timers.
 
 4. **View Rendering:**
     - `NextToGoView` observe changes in the respective ViewModels and updates the UI accordingly.
 
 5. **User Interaction:**
-    - Users interact with UI components from `SharedUI` (e.g., `CustomSegmentedControl`) to navigate between different sections.
+    - Users interact with UI components from `SharedUI` (e.g., `CustomSegmentedControl`) to filter between different race types.
     - Actions triggered by user interactions update the relevant ViewModels, leading to UI updates.
 
 ## Testing

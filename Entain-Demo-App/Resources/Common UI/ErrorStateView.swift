@@ -32,6 +32,7 @@ struct ErrorStateView: View {
     
     /// Empty State View - with Primary Button Closure
     /// - Parameter primaryCTA: closure
+    /// - Parameter errorDescription: description
     init(
         errorDescription: String = "",
         primaryCTA: @escaping () -> Void

@@ -128,7 +128,6 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
         errorMessage = ""
         isLoading = true
         interactor.refreshData()
-        // The interactor will handle updating `nextToGoRaces` and publishing errors
     }
     
     /// Updates the display filter based on the selected filter option

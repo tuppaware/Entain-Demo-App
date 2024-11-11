@@ -171,4 +171,8 @@ final class NextToGoDisplayModel: ObservableObject {
             return viewModel
         }
     }
+    
+    deinit {
+        cancellables.removeAll()
+    }
 }

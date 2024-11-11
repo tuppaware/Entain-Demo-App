@@ -12,9 +12,9 @@ import Foundation
 internal enum EntainStrings {
   internal enum InfoState {
     internal enum Error {
-      /// Well this is awkward, looks like we have an %@ error. Give it another shot?
+      /// Well this is awkward, looks like we have an %@. Give it another shot?
       internal static func description(_ p1: Any) -> String {
-        return EntainStrings.tr("Copy", "InfoState.Error.Description", String(describing: p1), fallback: "Well this is awkward, looks like we have an %@ error. Give it another shot?")
+        return EntainStrings.tr("Copy", "InfoState.Error.Description", String(describing: p1), fallback: "Well this is awkward, looks like we have an %@. Give it another shot?")
       }
       /// Whoops, looks like an Error
       internal static let title = EntainStrings.tr("Copy", "InfoState.Error.Title", fallback: "Whoops, looks like an Error")
@@ -41,9 +41,9 @@ internal enum EntainStrings {
     ///   Created by Adam Ware on 5/11/2024.
     internal static let title = EntainStrings.tr("Copy", "NextToGo.Title", fallback: "Entain Demo App")
     internal enum Section {
-      /// Next to go races %@
+      /// %@ Races Next To Go
       internal static func title(_ p1: Any) -> String {
-        return EntainStrings.tr("Copy", "NextToGo.Section.Title", String(describing: p1), fallback: "Next to go races %@")
+        return EntainStrings.tr("Copy", "NextToGo.Section.Title", String(describing: p1), fallback: "%@ Races Next To Go")
       }
     }
   }

@@ -14,5 +14,5 @@
 "InfoState.NoRaces.PrimaryCTA.Title" = "Check again";
 
 "InfoState.Error.Title" = "Whoops, looks like an Error";
-"InfoState.Error.Description" = "Well this is awkward, looks like we have an %@ error. Give it another shot?";
+"InfoState.Error.Description" = "Well this is awkward, looks like we have an %@. Give it another shot?";
 "InfoState.Error.PrimaryCTA.Title" = "Try again";

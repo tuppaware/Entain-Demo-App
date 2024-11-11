@@ -93,4 +93,8 @@ final class TimerManager: ObservableObject, TimerManagerProtocol {
         guard timers[id] != nil else { return }
         timers[id]?.remainingTime = duration
     }
+    
+    deinit {
+        clearAllTimers()
+    }
 }
