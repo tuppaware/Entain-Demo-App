@@ -15,7 +15,7 @@ struct TimerItem {
 }
 
 /// A class to manage multiple timers centrally and publish updates.
-class TimerManager: ObservableObject, TimerManagerProtocol {
+final class TimerManager: ObservableObject, TimerManagerProtocol {
     /// A dictionary of timer items managed by their UUID.
     @Published private(set) var timers: [UUID: TimerItem] = [:]
     
@@ -33,7 +33,6 @@ class TimerManager: ObservableObject, TimerManagerProtocol {
         let id = UUID()
         let newTimerItem = TimerItem(id: id, remainingTime: duration)
         timers[id] = newTimerItem
-        
         // Schedule the timer updates
         startTimer(for: id)
         
@@ -69,6 +68,12 @@ class TimerManager: ObservableObject, TimerManagerProtocol {
                 self.timers[id] = updatedTimer
             }
         }
+    }
+    
+    /// Clear and reset all timers
+    func clearAllTimers() {
+        timers.removeAll()
+        timerCancellables.removeAll()
     }
     
     /// Stops a timer for a given timer item ID.

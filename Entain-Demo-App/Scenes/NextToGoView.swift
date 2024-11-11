@@ -30,41 +30,51 @@ struct NextToGoView: View {
             VStack {
                 // Header
                 HeaderView()
-                
-                // Show loading skeleton view if data is loading
-                if viewModel.isLoading {
-                    List {
-                        Section {
-                            RaceItemSkeletonView()
-                        } header: {
-                            Text(EntainStrings.NextToGo.Section.title(selectedTab.displayTitle))
-                                .font(.subheadline)
-                                .foregroundStyle(.black)
-                        }
-                    }
-                    .scrollContentBackground(.hidden)
-                    .background(Color.clear)
-                } else {
-                    // Show race items when not loading
-                    List {
-                        Section {
-                            ForEach(displayModel.filteredRacesListDisplayModel, id: \.uuid) { raceViewModel in
-                                RaceItemView(viewModel: raceViewModel)
-                            }
-                        } header: {
-                            HStack {
+                // Check for error state
+                if viewModel.errorMessage.isEmpty {
+                    // Show loading skeleton view if data is loading
+                    if viewModel.isLoading {
+                        List {
+                            Section {
+                                RaceItemSkeletonView()
+                            } header: {
                                 Text(EntainStrings.NextToGo.Section.title(selectedTab.displayTitle))
                                     .font(.subheadline)
                                     .foregroundStyle(.black)
                             }
                         }
+                        .scrollContentBackground(.hidden)
+                        .background(Color.clear)
+                    } else {
+                        // Show race items when not loading
+                        List {
+                            Section {
+                                ForEach(displayModel.filteredRacesListDisplayModel, id: \.uuid) { raceViewModel in
+                                    RaceItemView(viewModel: raceViewModel)
+                                }
+                            } header: {
+                                HStack {
+                                    Text(EntainStrings.NextToGo.Section.title(selectedTab.displayTitle))
+                                        .font(.subheadline)
+                                        .foregroundStyle(.black)
+                                }
+                            }
+                        }
+                        .scrollContentBackground(.hidden)
+                        .background(Color.clear)
                     }
-                    .refreshable {
-                        await viewModel.refresh()
+                } else {
+                    // Show error state
+                    ErrorStateView(errorDescription: viewModel.errorMessage) {
+                        Task {
+                            await viewModel.refresh()
+                        }
                     }
-                    .scrollContentBackground(.hidden)
-                    .background(Color.clear)
+                    Spacer()
                 }
+            }
+            .refreshable {
+                await viewModel.refresh()
             }
             // Filter control for selecting race categories
             CustomSegmentedControl(

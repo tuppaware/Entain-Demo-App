@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 // Create the SwiftUI view that uses the protocol
 public struct InfoStateView<T: InfoStateProtocol>: View {
@@ -23,16 +24,24 @@ public struct InfoStateView<T: InfoStateProtocol>: View {
                 .scaledToFit()
                 .frame(height: 200)
                 .padding()
+                .accessibilityLabel(Text("Image\(model.title)"))
+                .accessibilityIdentifier("InfoStateViewImage")
+            
             Text(model.title)
                 .font(.title)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
+                .accessibilityIdentifier("Title")
+                .accessibilityAddTraits(.isHeader) // Indicates that the title is a header
+                
             Text(model.description)
                 .font(.body)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
+                .accessibilityIdentifier("Description")
+            
             Button(action: model.primaryCTA) {
                 Text(model.primaryCTATitle)
                     .fontWeight(.semibold)
@@ -43,8 +52,12 @@ public struct InfoStateView<T: InfoStateProtocol>: View {
                     .cornerRadius(8)
             }
             .padding(.horizontal)
+            .accessibilityIdentifier("InfoStateViewPrimaryCTAButton")
+            .accessibilityLabel(Text(model.primaryCTATitle))
+            .accessibilityHint(Text("Tap to \(model.primaryCTATitle.lowercased())"))
         }
         .padding()
+        .accessibilityElement(children: .contain) 
     }
 }
 

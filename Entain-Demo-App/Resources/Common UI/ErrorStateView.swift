@@ -32,10 +32,13 @@ struct ErrorStateView: View {
     
     /// Empty State View - with Primary Button Closure
     /// - Parameter primaryCTA: closure
-    init(primaryCTA: @escaping () -> Void) {
+    init(
+        errorDescription: String = "",
+        primaryCTA: @escaping () -> Void
+    ) {
         self.viewModel = ErrorStateViewModel(
             primaryCTA: primaryCTA,
-            errorDescription: ""
+            errorDescription: errorDescription
         )
     }
     

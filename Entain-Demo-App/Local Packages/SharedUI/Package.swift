@@ -23,10 +23,6 @@ let package = Package(
                 .product(name: "FlagKit", package: "FlagKit")
             ],
             resources: nil
-        ),
-        .testTarget(
-            name: "SharedUITests",
-            dependencies: ["SharedUI"]
         )
     ]
 )

@@ -71,8 +71,9 @@ public struct CustomSegmentedControl<Tab: TabRepresentable>: View {
                                 .padding(iconPadding)
                                 .foregroundColor(selectedTab == tab ? .white : .black)
                                 .accessibilityAddTraits(.isButton)
-                                .accessibilityLabel(tab.displayTitle)
-                                .accessibilityHint("Enables filtering by \(tab.displayTitle)")
+                                .accessibilityLabel(Text(tab.displayTitle))
+                                .accessibilityValue(selectedTab == tab ? "Selected" : "Not selected")
+                                .accessibilityHint(Text("Tap to select \(tab.displayTitle)"))
                         } else {
                             // Otherwise, display the tab's title as text
                             Text(tab.displayTitle)
@@ -80,9 +81,15 @@ public struct CustomSegmentedControl<Tab: TabRepresentable>: View {
                                 .frame(maxWidth: .infinity)
                                 .fontWeight(.semibold)
                                 .foregroundColor(selectedTab == tab ? .white : .black)
+                                .accessibilityAddTraits(.isButton)
+                                .accessibilityLabel(Text(tab.displayTitle))
+                                .accessibilityValue(selectedTab == tab ? "Selected" : "Not selected")
+                                .accessibilityHint(Text("Tap to select \(tab.displayTitle)"))
                         }
                     }
                     .contentShape(Rectangle()) // Makes the entire area tappable
+
+                    .accessibilityAddTraits(.isButton)
                     .frame(maxWidth: .infinity, minHeight: minHeight)
                     .onTapGesture {
                         // Animate the selection change
@@ -93,11 +100,16 @@ public struct CustomSegmentedControl<Tab: TabRepresentable>: View {
                     }
                 }
             }
-            .background(.regularMaterial)
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color(UIColor.systemBackground))
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+            )
             .cornerRadius(cornerRadius)
             .frame(maxWidth: .infinity, maxHeight: minHeight)
             .padding(.horizontal, horizontalPadding)
         }
+        .accessibilityElement(children: .contain)
     }
 }
 

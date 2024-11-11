@@ -8,7 +8,7 @@
 import Foundation
 
 /// Enum representing various API endpoints with associated request details
-public enum APIEndpoint: EndpointRequest, Sendable {
+public enum APIEndpoint: EndpointRequest, Sendable, Hashable {
     
     // Noting that you'd normally want to store this in an .xconfig file or similar
     private static let basURLString: String = "https://api.neds.com.au"

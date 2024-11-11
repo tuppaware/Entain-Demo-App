@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6315382A2CD9E52B006DFC86 /* SharedUI in Frameworks */ = {isa = PBXBuildFile; productRef = 631538292CD9E52B006DFC86 /* SharedUI */; };
 		633A1E0D2CD9D78900DC872C /* NetworkingManager in Frameworks */ = {isa = PBXBuildFile; productRef = 633A1E0C2CD9D78900DC872C /* NetworkingManager */; };
+		635462482CE198230051219F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 635462472CE198230051219F /* README.md */; };
 		63E006512CD9F9A3008CFCCC /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 63E006502CD9F9A3008CFCCC /* swiftgen.yml */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		634B6BEF2CD83D6900E1E317 /* EntainDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EntainDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634B6BFF2CD83D6A00E1E317 /* EntainDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		634B6C092CD83D6A00E1E317 /* EntainDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EntainDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		635462472CE198230051219F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		63E006502CD9F9A3008CFCCC /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 		634B6BE62CD83D6900E1E317 = {
 			isa = PBXGroup;
 			children = (
+				635462472CE198230051219F /* README.md */,
 				63E006502CD9F9A3008CFCCC /* swiftgen.yml */,
 				633A1DF12CD8954900DC872C /* EntainDemoApp-Info.plist */,
 				634B6BF12CD83D6900E1E317 /* Entain-Demo-App */,
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635462482CE198230051219F /* README.md in Resources */,
 				63E006512CD9F9A3008CFCCC /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +466,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,6 +498,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -507,7 +513,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B54Q48H848;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -526,7 +532,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B54Q48H848;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -544,13 +550,15 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B54Q48H848;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Entain-Demo-App";
+				TEST_TARGET_NAME = EntainDemoApp;
 			};
 			name = Debug;
 		};
@@ -561,13 +569,15 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B54Q48H848;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "me.adamware.Entain-Demo-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Entain-Demo-App";
+				TEST_TARGET_NAME = EntainDemoApp;
 			};
 			name = Release;
 		};

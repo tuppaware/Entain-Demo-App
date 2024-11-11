@@ -37,6 +37,9 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
     /// Indicates whether data is currently being loaded
     @Published private(set) var isLoading: Bool = true
     
+    /// Error State
+    @Published private(set) var errorMessage: String = ""
+    
     // MARK: - Private Properties
     
     /// Interactor for fetching race data
@@ -105,15 +108,15 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
         // Print an error message based on the error type
         switch error {
         case .invalidDecoding:
-            print("Failed to decode the response.")
+            errorMessage = "Failed to decode the response."
         case .invalidHTTPResponse:
-            print("Invalid HTTP response.")
+            errorMessage = "Invalid HTTP response."
         case .serverError(let statusCode):
-            print("Server error with status code: \(statusCode)")
+            errorMessage = "Server error with status code: \(statusCode)"
         case .unknown:
-            print("An unknown error occurred.")
+            errorMessage = "An unknown error occurred."
         case .invalidURL:
-            print("Invalid URL")
+            errorMessage = "Invalid URL"
         }
     }
     
@@ -121,6 +124,8 @@ class NextToGoViewModel: NextToGoViewModelProtocol {
     
     /// Initiates a data refresh by invoking the interactor to fetch new data
     func refresh() async {
+        // clear loading and error states 
+        errorMessage = ""
         isLoading = true
         interactor.refreshData()
         // The interactor will handle updating `nextToGoRaces` and publishing errors

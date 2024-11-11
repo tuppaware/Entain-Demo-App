@@ -8,7 +8,7 @@
 import SwiftUI
 import FlagKit
 
-/// A view representing a single race item in a list, displaying race details and countdown timer.
+// A view representing a single race item in a list, displaying race details and countdown timer.
 public struct RaceItemView: View {
     
     /// The view model containing data for the race item.
@@ -27,10 +27,13 @@ public struct RaceItemView: View {
                 viewModel.image
                     .resizable()
                     .frame(maxWidth: 30, maxHeight: 30)
+                    .accessibilityHidden(true) // Mark as decorative if not conveying information
+                
                 Text("\(viewModel.meetingName) R\(viewModel.raceNumber)")
                     .font(.title3)
                     .foregroundColor(.primary)
                     .fontWeight(.semibold)
+                    .accessibilityLabel(Text("\(viewModel.meetingName) Race \(viewModel.raceNumber)"))
             }
             
             Spacer()
@@ -41,34 +44,42 @@ public struct RaceItemView: View {
                     .foregroundStyle((viewModel.countDownTime ?? 0 > 180) ? .black : .red)
                     .monospacedDigit()
                     .font(.subheadline)
-                    .foregroundColor(.primary)
+                    .foregroundColor((viewModel.countDownTime ?? 0 > 180) ? .primary : .red)
+                    .accessibilityLabel(Text("Time remaining: \(viewModel.countdownString)"))
                 
                 if let image = viewModel.flagCountryCode {
                     image
+                        .resizable()
                         .scaledToFit()
                         .frame(height: 20)
+                        .accessibilityLabel(Text("\(viewModel.countryName) Flag"))
                 } else {
                     Text(viewModel.countryName)
                         .font(.footnote)
                         .foregroundColor(.primary)
+                        .accessibilityLabel(Text("Country: \(viewModel.countryName)"))
                 }
             }
         }
-        // Note: - Accessibitlity label should be localised as well, but to save time in a sepereate package I have omitted it here.
-        .accessibilityLabel("Countdown to race start for \(viewModel.meetingName) Race \(viewModel.raceNumber): \(viewModel.countdownString)")
         .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("Countdown to race start for \(viewModel.meetingName) Race \(viewModel.raceNumber): \(viewModel.countdownString)"))
         .transition(.opacity)
     }
 }
 
-
-#Preview {
-    let vm = RaceItemViewModel(
-        raceNumber: 25,
-        meetingName: "Meeting name",
-        image: Image(uiImage: .checkmark),
-        countryName: "countryName",
-        timerID: UUID()
-    )
-    RaceItemView(viewModel: vm)
+struct RaceItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        let vm = RaceItemViewModel(
+            raceNumber: 25,
+            meetingName: "Meeting name",
+            image: Image(uiImage: .checkmark),
+            countryName: "AUS",
+            timerID: UUID()
+        )
+        RaceItemView(viewModel: vm)
+            .previewLayout(.sizeThatFits)
+    }
 }
+
+

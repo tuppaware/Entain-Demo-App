@@ -55,14 +55,14 @@ public final class RaceItemViewModel: RaceItemViewModelProtocol, ObservableObjec
         case countDownTime < 1:
             return ""
         case hours > 0:
-            components.append("\(hours)h")
+            components.append("\(hours) hrs")
         case countDownTime > 300:
-            components.append("\(minutes)m")
+            components.append("\(minutes) mins")
         case countDownTime < 300 && minutes > 0:
-            components.append("\(minutes)m")
-            components.append("\(seconds)s")
+            components.append("\(minutes) mins")
+            components.append("\(seconds) sec")
         case countDownTime < 300 && minutes < 1:
-            components.append("\(seconds)s")
+            components.append("\(seconds) sec")
         default :
             return ""
         }
